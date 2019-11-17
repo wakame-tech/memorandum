@@ -1,3 +1,5 @@
+const Dotenv = require('dotenv-webpack')
+
 module.exports = {
   title: 'Memorundum',
   theme: '@vuepress/theme-blog',
@@ -30,6 +32,11 @@ module.exports = {
       }
     }]
   ],
+  configureWebpack: {
+    plugins: [
+      new Dotenv()
+    ]
+  },
   themeConfig: {
     nav: [
       {
