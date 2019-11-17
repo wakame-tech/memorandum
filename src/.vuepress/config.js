@@ -3,6 +3,9 @@ const Dotenv = require('dotenv-webpack')
 module.exports = {
   title: 'Memorundum',
   theme: '@vuepress/theme-blog',
+  // head: [
+  //   ['script', { src: './util.js' }]
+  // ],
   plugins: [
     ['@vuepress/blog', {
       directories: [

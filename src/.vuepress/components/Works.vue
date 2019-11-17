@@ -9,7 +9,9 @@
             <img :src="work.thumbnail.fields.file.url" />
           </div>
         </div>
+
         <Markdown>{{ work.description }}</Markdown>
+
         <p class="date"> {{ new Date(work.date).toDateString() }} </p>
       </div>
     </template>
@@ -19,14 +21,14 @@
 <script>
 import * as Contentful from 'contentful'
 
-const createClient = () => {
+export const createClient = () => {
   return Contentful.createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN
   })
 }
 
-const fetchContents = async (query) => {
+export const fetchContents = async (query) => {
   const client = createClient()
   const entries = await client.getEntries(query)
     .catch(console.error)
