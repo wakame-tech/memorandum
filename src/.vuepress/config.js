@@ -5,23 +5,23 @@ module.exports = {
     ['@vuepress/blog', {
       directories: [
         {
-          id: 'post',
+          id: 'title',
           dirname: '_posts',
           path: '/blog/',
           itemPermalink: '/post/:year/:month/:day/:slug',
           pagination: {
-            lengthPerPage: 5
+            lengthPerPage: 10
           }
         }
       ],
-      // frontmatters: [
-      //   {
-      //     id: 'tag',
-      //     keys: ['tag'],
-      //     path: '/tag/',
-      //     scopeLayout: 'Tag'
-      //   }
-      // ]
+      frontmatters: [
+        {
+          id: 'tag',
+          keys: ['tag'],
+          path: '/tag/',
+          scopeLayout: 'Tag'
+        }
+      ]
     }],
     ['vuepress-plugin-mathjax', {
       target: 'svg',

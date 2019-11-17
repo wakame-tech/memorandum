@@ -1,0 +1,286 @@
+---
+title: 📈 数理計画法
+date: 2018-12-10
+tag: C++
+---
+
+大学の実験テーマで `(数理計画法)数理最適化` の基礎の基礎を学んだので、まとめておこうと思います。
+
+今回扱ったのは `無制約の非線形最適化問題` に対する基本的な解法である、
+
+* 最急降下法
+* ニュートン法
+* 準ニュートン法
+
+の３つを `C++` により実装しました。  
+本当は `Eigen` などの行列演算ライブラリを使うほうが楽なのでしょうが、今回はちょっとした行列演算ライブラリを自作しました。
+
+## 行列演算
+
+```cpp
+// M 行 N 列
+template <size_t M = 0, size_t N = 0>
+class Mat {
+public:
+  std::array<std::array<double, N>, M> data;
+
+  Mat(std::initializer_list<double> _data) {
+    auto it = _data.begin();
+    for (size_t i = 0; i < M; i++) {
+      for (size_t j = 0; j < N; j++) 
+        data[i][j] = *it++;
+    }
+  }
+  
+  (略)
+}
+```
+
+`非型テンプレートパラメータ` を使った `Mat` クラスを作りました。行列の積が型レベルで保証されるのがうれしい。  
+中身は単純で `double型` でサイズが `M × N` の２次元配列を値として持っています。 `std::initializer_list` により行列を生成することができます。
+
+```cpp
+auto A = Mat<2, 2> {
+  1, 2,
+  4, 5,
+};
+
+auto B = Mat<2, 2> {
+  1, 2,
+  3, 4,
+};
+```
+
+この行列クラスに様々な `演算子オーバーロード` をすることで、行列の基本的な演算をサポートしています。
+
+```cpp
+A + B; // 和
+A - B; // 差
+A * B; // 積
+A * 3; // 定数倍
+!A; // 転置行列
+~A; // 逆行列
+```
+
+このようにすることでより数式に近い形で直感的にコードをを書くことができると思います。
+バグも減るし。
+
+## 最適化の流れ
+最適化の解法はいくつかありますが、最適化を行う流れは共通しています。
+
+最適解は
+
+$$f \left( {x}^\ast \right) \leq f \left( {x} \right), \forall{{x}} \in \mathbb{R}^n$$
+
+を満たすような ${x}^\ast$ となります。
+なので、初期点 ${x}_0$ から探索を始めて、毎ステップでより目的関数値 $ \| f \left( {x}_k \right) \|$ が小さくなるように ${x}_k$ を更新していきます。
+通常は目的関数値がある程度小さくなる(今回は $10^{-8}$)と探索は終了します。
+この ${x}_k$ をどのように更新するかは、解法によって異なります。
+
+## 最急降下法
+最急降下法の場合、更新式は
+
+$${x}_{k + 1} = {x}_k + \alpha_k {d}_k$$
+
+となります。 ${d}_k$ は `探索方向ベクトル` で方向は `最急降下方向` つまり勾配ベクトルの真逆となります。なので、
+
+$${d}_k = - \nabla f \left( {x}_k \right)$$
+
+となります。
+
+$\alpha_k$ は `ステップ幅` を表していて、直線探索により求めます。  
+ 初期値 $1$ で `アルミホ条件` が成り立つまで $\tau$ 倍されていきます。
+
+この手法は初期点に依存せずに停留点に収束しますが、収束のスピードが非常に遅いです。
+
+## ニュートン法
+ニュートン法の場合、更新式は
+
+$${x}_{k + 1} = {x}_k + {d}_k$$
+
+であり、 ${d}_k$ は、`ニュートン方向` といい、`ニュートン方程式`
+
+$$\nabla^2 f \left( {x}_k \right) {d}_k = - \nabla f \left( {x}_k \right)$$
+
+を解くことにより得られます。ニュートン法は速いですが、局所最適解ではないところで停留したりもします。
+その欠点を補うのが次の準ニュートン法です。
+
+## 準ニュートン法
+準ニュートン法の場合、更新式は
+
+$${x}_{k + 1} = {x}_k + \alpha_k {d}_k$$
+
+となります。 ${d}_k$ は
+
+$$B_k {d}_k = - \nabla f \left( {x}_k \right)$$
+
+を解くことで得られ、$B_k$ は `BFGS公式` により更新します。(数式かくの面倒くさい)
+
+となります。
+
+$\alpha_k$ は `ステップ幅` なので `アルミホ条件による直線探索` で求めましょう。
+
+## ほんだい
+理論の説明は終わったので、いよいよ実装していきましょう。
+
+### 目的関数
+
+まず、今回は２次元での最適化であり、目的関数は
+
+$$f \left( {x} \right) = \frac{1}{2} {x}^T {Q} {x} + {c}^T {x} + e^{ { \left( {x}_{1} - {x}_{2} \right) }^2 }$$
+
+なので、コードに表すと
+
+```cpp
+double f1(Mat<2, 1> x, Mat<2, 1> c, Mat<2, 2> Q) {
+  return (!x * Q * x).scalarize() / 2 + (!c * x).scalarize() + std::exp(sq(x._(1) - x._(2)));
+}
+```
+
+ほぼそのまま表せていると思います。 
+`.scalarize()` は `1 × 1 行列` を `double型` に変換する関数です。
+`x._(i)` は ${x}$ の $i$ 番目の値を返す関数です。
+
+### 勾配ベクトルのコード
+同様に `勾配ベクトル` は
+
+```cpp
+Mat<2, 1> grad1(Mat<2, 1> x, Mat<2, 1> c, Mat<2, 2> Q) {
+  const double c1 = c._(1), c2 = c._(2), p = Q.at(0, 0), q = Q.at(0, 1), r = Q.at(1, 1);
+  const double sqex = (x._(1) - x._(2)) * std::exp(sq(x._(1) - x._(2)));
+  return Mat<2, 1>{
+    p * x._(1) + q * x._(2) + c1 + 2 * sqex,
+    q * x._(1) + r * x._(2) + c2 - 2 * sqex
+  };
+}
+```
+
+### ヘッセ行列のコード
+`ヘッセ行列` もみていきましょう。
+
+```cpp
+Mat<2, 2> hesse1(Mat<2, 1> x, Mat<2, 1> c, Mat<2, 2> Q) {
+  const double c1 = c._(1), c2 = c._(2), p = Q.at(0, 0), q = Q.at(0, 1), r = Q.at(1, 1);
+  // ex = e ^ ((x1 - x2) ^ 2)
+  const double sqex = std::exp(sq(x._(1) - x._(2)));
+  // X = (4 * ((x1 - x2) ^ 2) + 2) * ex
+  const double X = (4 * sq(x._(1) - x._(2)) + 2) * sqex;
+  return Mat<2, 2>{
+    p + X, q - X,
+    q - X, r + X
+  };
+}
+```
+
+はい。わかりやすい。
+
+### 最急降下法のコード
+最適化を行う部分のみを抜き出したコードをみていきましょう。
+
+```cpp
+// 最急降下法
+void steepest_descent(F f, Grad grad, Mat<2, 1> x0) {
+  auto xk = x0;
+  do {
+    auto dk = -grad(xk);
+    auto alpha = line_search(f, grad, xk, dk);
+    xk += dk * alpha;
+  } while (grad(xk).norm() > 1e-8);
+}
+```
+
+理論で説明したように初期値からスタートして、目的関数値を満たすまで `xk` を更新していってます。
+ここで、注目してほしいのは、引数の `F f, Grad grad` 部分です。`F型`, `Grad型` 共に自分で定義した関数型であり、
+関数を引数に取ることで容易に目的関数を変えることができます。
+
+### 関数を引数に取る
+`C++` では `functional` ヘッダの `std::function` を使うことによって関数またはラムダ式を変数のように扱うことができ、これにより引数を関数として呼ぶことができます。
+
+```cpp
+#include <functional>
+ // std::function<返り値の型(引数の型...)>
+using F = std::function<double(Mat<2, 1>)>;
+using Grad = std::function<Mat<2, 1>(Mat<2, 1>)>;
+using Hesse = std::function<Mat<2, 2>(Mat<2, 1>)>;
+```
+
+引数にラムダ式を渡すことができます。
+
+```cpp
+  auto F1 = [c, Q](Mat<2, 1> x) { return f1(x, c, Q); };
+  auto Grad1 = [c, Q](Mat<2, 1> x) { return grad1(x, c, Q); };
+
+  steepest_descent(F1, Grad1, x1);
+```
+
+### アルミホ条件による直線探索のコード
+```cpp
+// アルミホ条件が成り立っているか判定します
+bool armijo_condition(F f, Grad grad, double alpha, Mat<2, 1> xk, Mat<2, 1> dk) {
+  const double xi = 0.25;
+  return f(xk + dk * alpha) <= (f(xk) + xi * alpha * (!grad(xk) * dk).scalarize());
+}
+
+// アルミホ条件による直線探索
+double line_search(F f, Grad grad, Mat<2, 1> xk, Mat<2, 1> dk) {
+  double alpha = 1.0, tau = 0.5;
+  while (!armijo_condition(f, grad, alpha, xk, dk) && alpha > 1e-8) {
+    alpha *= tau;
+  }
+  return alpha;
+}
+```
+
+テキストにある数式をそのまま書いただけです。
+
+### ニュートン法の更新式部分のコード
+
+```cpp
+  xk += ~hesse(xk) * -grad(xk);
+```
+
+やるだけ。
+
+### 準ニュートン法の更新式部分のコード
+```cpp
+xk_pre = xk;
+auto dk = ~Bk * -grad(xk);
+double alpha = line_search(f, grad, xk, dk);
+xk += dk * alpha;
+Bk = bfgs(grad, Bk, xk, xk_pre);
+```
+
+やるだけ。
+
+### BFGS公式
+```cpp
+// BFGS 公式を計算します
+Mat<2, 2> bfgs(Grad grad, Mat<2, 2> Bk, Mat<2, 1> xk, Mat<2, 1> xk_pre) {
+  auto sk = xk - xk_pre, yk = grad(xk) - grad(xk_pre);
+  return Bk - (Bk * sk * !(Bk * sk)) / (!sk * Bk * sk) + (yk * !yk) / (!sk * yk);
+}
+```
+
+行列演算ライブラリ様様です。数式通り書くことができています。
+逆にこれ生の配列で書いたらどうなるんだろうか。想像もしたくない。
+
+## まとめ
+今回は行列ライブラリを自作することにより、見た目にもデバッグにも優しいコードを書くことができました。
+これからも行列はプログラム上で扱うことが多々あると思うので、ぜひライブラリを作ってみてください。  
+
+**良きC++ライフを!**
+
+~~コード全体は こちら~~
+なんかコードコピーされた方もコピレポした人と同罪らしいので公開やめます。ごめんなさい。
+
+
+`C++11` の機能等を使っているはずなので、コンパイルは
+
+```
+clang++ -std=c++11 source.cpp
+```
+
+で
+
+## 参考文献
+* 実験テキスト
