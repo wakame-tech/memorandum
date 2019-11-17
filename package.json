@@ -1,0 +1,17 @@
+{
+  "name": "memorandum",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev src"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-blog": "^1.5.1",
+    "@vuepress/theme-blog": "^1.3.2"
+  },
+  "dependencies": {
+    "vuepress": "^1.2.0",
+    "vuepress-plugin-mathjax": "^1.2.8"
+  }
+}
