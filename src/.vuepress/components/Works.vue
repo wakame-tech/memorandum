@@ -3,7 +3,7 @@
     <template v-for="(work, i) in works">
       <div>
         <h2> {{ work.title }} </h2>
-        <span class="tag" v-for="tag in work.tags">{{ `#${tag}` }}</span>
+        <span class="tag" v-for="tag in work.tags"><a :href="`/tag/${tag}/`">{{ `#${tag}` }}</a></span>
         <div v-if="work.thumbnail">
           <div>
             <img :src="work.thumbnail.fields.file.url" />
@@ -59,6 +59,7 @@ export default {
 <style>
 .tag {
   padding-left: 0.3em;
+  margin-bottom: 0.5em;
 }
 
 .date {
