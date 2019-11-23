@@ -1,4 +1,10 @@
 const Dotenv = require('dotenv-webpack')
+const webpack = require('webpack')
+const { config } = require('dotenv')
+
+config()
+
+console.log(process.env.CONTENTFUL_SPACE_ID)
 
 module.exports = {
   title: 'Memorundum',
@@ -24,7 +30,13 @@ module.exports = {
   ],
   configureWebpack: {
     plugins: [
-      new Dotenv()
+      // new Dotenv()
+      new webpack.DefinePlugin({
+        'process.env': {
+          'CONTENTFUL_SPACE_ID': JSON.stringify(process.env.CONTENTFUL_SPACE_ID),
+          'CONTENTFUL_DELIVERY_ACCESS_TOKEN': JSON.stringify(process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN)
+        }
+      })
     ]
   },
   head: [

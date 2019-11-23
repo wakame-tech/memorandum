@@ -20,7 +20,7 @@
 
 <script>
 import * as Contentful from 'contentful'
-import process from 'process'
+// import process from 'process'
 
 export const createClient = () => {
   console.log(process.env.CONTENTFUL_SPACE_ID)
