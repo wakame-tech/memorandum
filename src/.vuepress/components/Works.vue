@@ -20,8 +20,11 @@
 
 <script>
 import * as Contentful from 'contentful'
+import process from 'process'
 
 export const createClient = () => {
+  console.log(process.env.CONTENTFUL_SPACE_ID)
+
   return Contentful.createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN
