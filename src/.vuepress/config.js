@@ -10,8 +10,8 @@ module.exports = {
     //     {
     //       id: 'title',
     //       dirname: '_posts',
-    //       path: '/blog/',
-    //       itemPermalink: '/post/:year/:month/:day/:slug',
+    //       path: '/',
+    //       itemPermalink: '/posts/:year/:month/:day/:slug',
     //       pagination: {
     //         lengthPerPage: 10
     //       }
@@ -46,7 +46,7 @@ module.exports = {
   },
   defaultPages: {
     // Allow theme to add Home page (url: /)
-    home: false,
+    home: true,
     // Allow theme to add Posts page (url: /posts/)
     posts: true,
   },
@@ -83,19 +83,22 @@ module.exports = {
     nav: [
       {
         text: 'ホーム',
-        link: '/home',
+        link: '/home/',
+        exact: true
       },
       {
         text: 'ブログ',
         link: '/',
+        exact: true
       },
       {
         text: 'Works',
         link: '/portfolio/',
+        exact: true
       },
       {
         text: 'Til',
-        link: '/til/',
+        link: '/til/'
       }
     ]
   }
