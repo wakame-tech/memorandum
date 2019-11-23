@@ -1,7 +1,8 @@
 ---
 title: 💻 自作言語インタプリタを作りたい9
-date: 2018-8-31
-tag: [programming, 自作言語インタプリタ]
+date: 2018-08-31
+tags: [programming, 自作言語インタプリタ]
+vssue: false
 ---
 # 過ぎるだけの時間じゃ悔しい
 「過ぎるだけの時間じゃ悔しい」はアニメ「さくら荘のペットな彼女」ED、「DAYS of DASH/鈴木このみ」の歌詞の冒頭部分が元ネタです。[歌詞](http://www.kasi-time.com/item-64534.html)  

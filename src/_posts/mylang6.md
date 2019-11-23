@@ -1,7 +1,8 @@
 ---
 title: 💻 自作言語インタプリタを作りたい6
-date: 2018-8-9
-tag: programming
+date: 2018-08-09
+tags: [programming]
+vssue: false
 ---
 # 連勤最終日
 今日は昼にピアノ教室があったので午前中はピアノを弾いてました。早くうまくなりたい。

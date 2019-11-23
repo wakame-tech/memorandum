@@ -17,6 +17,7 @@
     "dotenv": "^8.2.0",
     "vue-markdown": "^2.2.4",
     "vuepress": "^1.2.0",
-    "vuepress-plugin-mathjax": "^1.2.8"
+    "vuepress-plugin-mathjax": "^1.2.8",
+    "vuepress-theme-meteorlxy": "^1.7.1"
   }
 }

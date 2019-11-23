@@ -1,7 +1,8 @@
 ---
 title: 💻 自作言語インタプリタを作りたい7
-date: 2018-8-11
-tag: [programming, piano]
+date: 2018-08-11
+tags: [programming, piano]
+vssue: false
 ---
 
 # 休日
