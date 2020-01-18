@@ -15,11 +15,8 @@ draft: false
 ## 対象
 - 弊学科で「コンパイラ」を履修していて教えてくれと言ってきた人たち(数人)
 
-## ToC
-- [環境](#環境)
-- [はじめに](#はじめに)
-- [コンパイラ拡張の流れ](#コンパイラ拡張の流れ)
-- [リポジトリ](#リポジトリ)
+## 課題
+
 - [剰余演算子](#剰余演算子)
 - [累乗演算子](#累乗演算子)
 - [for文](#for文)
@@ -28,11 +25,13 @@ draft: false
 - [配列](#配列)
 - [条件演算子](#条件演算子)
 - [インクリメント・デクリメント](#インクリメント・デクリメント)
-- 
-## リポジトリ
-<a href="https://github.com/wakame-tech/pl0c"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/wakame-tech/pl0c.png" width="460px"></a> 
 
-#### ディレクトリ構成
+## リポジトリ
+今回の実装リポジトリはこちらになります。(MIT License)
+
+<a href="https://github.com/wakame-tech/cmmc"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/wakame-tech/cmmc.png" width="460px"></a> 
+
+### ディレクトリ構成
 ```
 ├── compiler // cmm compiler src
 ├── examples // cmm, pl0 examples
@@ -41,7 +40,7 @@ draft: false
 └── vm // pl0 vm src
 ```
 
-このようなディレクトリ構成となっており `compiler` が `cmm`、 `vm` が `pl0i_src` に対応します。
+このようなディレクトリ構成となっており ディレクトリ名は `cmm -> compiler`、 `pl0i_src -> vm` と対応します。
 
 ## 環境
 ```
@@ -69,7 +68,7 @@ Apple LLVM version 10.0.1 (clang-1001.0.46.4)
 - 構文解析(`.yファイル`)
 - コード生成
 
-という流れで `pl0` が生成されるので基本は `.lファイル` と `.y` ファイルをいじっていけば出来ると想います。  
+という流れで `pl0` が生成されるので基本は `.lファイル` と `.y ファイル`をいじっていけば出来ると想います。  
 授業で配布されたソースコードには予めコード生成をするための関数などが備わっており、ほとんどの課題はそれを利用して表面的に書き換えれば出来ると思います(`.y` ファイルを書き換えるだけという意)。  
 よく使う関数 `mergecode()`, `makecode()` について2項を足し算する構文を例にとって説明します。
 
@@ -187,7 +186,7 @@ void interpreter() {
 ## 剰余演算子
 当初は `a % b` は `a - b * (a // b)` と等価なので、そのようにコードを生成することで実現しようとしました
 
-#### `$1`, `$3` を2回使いたい...
+### `$1`, `$3` を2回使いたい...
 ```c
 | expr MOD expr {
     // (a (b (a b /) *) -)
@@ -231,7 +230,7 @@ interpreter() {
 
 `P_MOD` 演算子の処理を追記し、
 
-#### cmmc/lexer.l
+#### compiler/lexer.l
 ```
 ...
 "%" return MOD;
@@ -240,7 +239,7 @@ interpreter() {
 
 `%` を `MOD` トークンとして認識するようにし、
 
-#### cmmc/parser.y
+#### compiler/parser.y
 ```c
 ...
 | expr MOD expr {
@@ -260,7 +259,7 @@ interpreter() {
 
 for文の構文は以下のようになります。
 
-#### 構文
+### 構文
 ```
 for <初期化>; <条件式>; <更新式> do
     <内容> ...
@@ -270,7 +269,7 @@ end
 
 これを実現するアセンブリコードは次の様に生成されて欲しいです。
 
-#### 擬似アセンブリコード
+### 擬似pl0コード
 ```
     ...
     <初期化>
@@ -285,7 +284,8 @@ end:
 
 あとはこれをC言語に落とし込むだけです。
 
-#### `cmmc/parser.y`
+### 実装
+#### `compiler/parser.y`
 ```
 for_stmt
   : FOR expr SEMICOLON expr SEMICOLON expr DO stmts END {
@@ -308,7 +308,7 @@ for_stmt
 `makelabel()` は連番で整数を返してくれる関数です。
 
 ## goto文・label文
-#### 構文
+### 構文
 ```
 label <str>;
 goto <str>;
@@ -323,7 +323,7 @@ goto <str>;
 
 一見するとこれでうまくいくように思えるかもしれませんが、これでは、 `goto <str>` が `label <str>` より上にあるときに `goto <str>` 時点では存在しないラベルとなりコードを生成することが出来ません。
 
-#### 対応できない例
+### 対応できない例
 ```
 goto hello;
 label hello;
@@ -336,7 +336,8 @@ label hello;
 
 こうすることで、 `goto` 文・ `label` 文のどちらが先にきても対応することが出来ます。
 
-#### cmmc/parser.y
+### 実装
+#### compiler/parser.y
 ```
 // label and index dict
 struct label_t { int k; char * v; };
@@ -389,7 +390,7 @@ int cases_i = 0;
 ## case文
 続いて `switch` 文です。
 
-#### 構文
+### 構文
 ```
 switch v do
   1: write 1;
@@ -401,7 +402,7 @@ end
 `switch` 文は 0個以上の `case` と `default` からなり、変数が条件を満たした `case` の中身が実行され `end` まで処理が飛びます。構文解析は下位の規則から行われるので、`switch v ...` の部分よりも先に各 `case 1` の部分のコードが生成されることになります。  
 しかし、ここにも問題があって、`case` 部分ではまだ `v` という変数の情報は得られていないので、何の変数が `== 1` なのかわからずコード生成をすることが出来ません。なので、一旦適当な変数に `case` の部分を保存しておいて、 `switch v ...` の部分でまとめてコード生成をするという方式を取ることにしました。  
 
-#### cmmc/parser.y
+#### compiler/parser.y
 ```c
 // temporary cases holder
 struct case_t { cptr * cond, * stmt; };
@@ -428,10 +429,11 @@ case
 `switch` では最初に一番下に飛ぶようなラベルを生成し、各 `case` の最後にそのラベルを挿入することによって `break` を表すことが出来ます。  
 
 default節は常に条件が成り立って欲しいので条件を `1(常にtrue)` としています。
-```
+
+```c
 ...
 
-switch_stmt
+ switch_stmt
   : SWITCH IDENT DO cases END {
     cptr *tmp = NULL;
     int end_label = makelabel();
@@ -500,9 +502,9 @@ case
 ```
 
 ## 配列
-続いて、配列です。配列の実装が一番変更箇所が多く、難易度が高いように思えます。
+続いて、配列です。配列の実装が一番変更箇所が多く、難易度が高いように思えます。 
 
-#### 構文
+### 構文
 ```
 var a[2], b[2], i;
 i := 1
@@ -511,6 +513,34 @@ write a[0];
 writeln;
 ```
 
+### 動的なLoad/Store
+`pl0` に存在する `LOD`, `STO` は定数なアドレス、つまり特定の変数を指定してのロード・ストアは出来ました。しかし、配列は `arr[i]` のように添字に変数が来ることもあり、`LOD`, `STO` では対応できません。
+
+```
+( STO, 0, 3 )
+( LOD, 0, 3 )
+```
+
+そこで、スタックの値をアドレスとして、ロード・ストアする `DLD` (Dynamic LoaD), `DST` (Dynamic STore) を作る必要があります。
+
+```
+...
+( INT, 0, 2 ) // allocate a[2]
+
+( LIT, 0, 2 )
+( STO, 0, 3 ) // i = 1
+
+( LOD, 0, 3 )
+( DLD, 0, 0 ) // a[i]
+
+( LIT, 0, 5 )
+( LIT, 0, 1 )
+( DST, 0, 0 ) // a[1] = 5
+```
+
+それでは、VMから拡張していきます。
+
+### VMを拡張
 #### vm/code.h
 ```
   /* operation codes of PL/0 code */
@@ -522,32 +552,94 @@ writeln;
 
 #### vm/inter.c
 ```c
-...
-case O_DLD:
-    r = s[t--];
-    if (t <= r) {
-        printf("warning index out of range %d <= %d\n", t, r);
-    }
-    // dynamic load
-    s[++t] = s[base(l) + r];
-    break;
+void interpreter() {
+  ...
+  case O_DLD:
+      r = s[t--];
+      if (t <= r) {
+          printf("warning index out of range %d <= %d\n", t, r);
+      }
+      // dynamic load
+      s[++t] = s[base(l) + r];
+      break;
 
-case O_DST:
-    r = s[t--];
-    if (t <= r) {
-        printf("warning index out of range %d <= %d\n", t, r);
-    }
-    // dynamic store
-    s[base(l) + r] = s[t--];
-    break;
-    ...
+  case O_DST:
+      r = s[t--];
+      if (t <= r) {
+          printf("warning index out of range %d <= %d\n", t, r);
+      }
+      // dynamic store
+      s[base(l) + r] = s[t--];
+      break;
+      ...
+}
 ```
+
+シンプルにスタックを1消費してその値をもとにアクセスする場所を決めています。
+
+### コンパイラを拡張
 
 #### compiler/lexer.l
 ```
 + "[" return L_SQBRACKET;
 + "]" return R_SQBRACKET;
 ```
+
+角括弧(Square Bracket) を配列の添字アクセスの記号とします。
+
+
+
+ここで、問題が発生します。この `cmm` という言語は最初に使用する変数を `var a, b, c ...` という感じで宣言するので、コンパイラはその時に変数達がどのくらい領域を使うのかを計算しています。(`vd_backpatch()`)
+
+#### compiler/parser.y
+```
+_decls
+  : decls {
+    int size = vd_backpatch($1.val, offset);
+    $$.val = size;
+    offset = offset + $1.val;
+  }
+  ;
+```
+
+今までの変数はもちろんアドレスを1つしか使わないので **変数の数 = 使う領域の数** であり、そのような実装となっていました。
+
+#### compiler/env.c
+```c
+void vd_backpatch(int n_of_vars, int offset){
+  int i;
+  list* tmp = gettail();
+  
+  for(i = 0; i < n_of_vars; i++){
+    tmp->a = SYSTEM_AREA + offset + i;
+    tmp = tmp->prev;
+  }
+}
+```
+
+しかし、配列は変数一つにつき複数の領域を使うのでこのままでは使う正しい領域の場所を計算することは出来ません。そこで、各変数に長さの情報をもたせる必要があります。
+
+#### compiler/env.h
+```c
+typedef struct LIST {
+  // variable name
+  char        *name;
+  // VARIABLE
+  int          kind;
+  // offset
+  int          a;
+  // level
+  int          l;
+  // ?
+  int          params;
+  // length if var is array, must be positive
+  int length;
+
+  struct LIST *prev;
+} list;
+```
+
+コンパイラ中では変数の情報は `struct LIST` という構造体で管理されていました。なので、そこに長さの情報を追加します。
 
 #### compiler/env.c
 ```c
@@ -558,6 +650,33 @@ case O_DST:
  ...
 }
 ```
+
+それに伴い、変数追加時に長さも一緒に指定できるようにします。これで、使う領域を計算するときに各変数の長さを考慮して計算することが出来ます。
+
+```c
+// return total memory size
+int vd_backpatch(int n_of_vars, int offset){
+  list * tmp = gettail();
+  
+  int cnt = 0;
+  for(int i = 0; i < n_of_vars; i++) {
+    if (tmp == NULL) {
+      printf("[Internal Compile Error] backpaching failure\n");
+      return -1;
+    }
+    printf("%s { .a = %d .length = %d }\n", tmp->name, SYSTEM_AREA + offset + cnt, tmp->length);
+    tmp->a = SYSTEM_AREA + offset + cnt;
+    // for array
+    cnt += tmp->length;
+    tmp = tmp->prev;
+  }
+
+  return  cnt;
+}
+```
+
+### 構文を拡張
+あとは、プログラム中で配列の宣言、要素の取得、要素への代入をできるようにするだけです。やっていることは今までと変わらないので説明は割愛します。
 
 #### compiler/parser.y
 ```
@@ -576,112 +695,172 @@ idents:
         $$.code = NULL;
         $$.val = $1.val + 1;
     }
-    | ...
+    | IDENT L_SQBRACKET NUMBER R_SQBRACKET {
+        if (search_block($1.name) == NULL){
+          addlist($1.name, VARIABLE, 0, level, 0, $3.val);
+        }
+        else {
+          sem_error1("var");
+        }
+
+        $$.code = NULL;
+        $$.val = 1;
+    }
 ```
-宣言部分
+
+宣言部分。
+
 
 #### compiler/parser.y
 ```
-| IDENT L_SQBRACKET NUMBER R_SQBRACKET {
-    if (search_block($1.name) == NULL){
-      addlist($1.name, VARIABLE, 0, level, 0, $3.val);
-    }
-    else {
-      sem_error1("var");
-    }
+...
+stmt
+    : ...
+    | READ IDENT L_SQBRACKET expr R_SQBRACKET SEMICOLON {
+        list * tmpl;
+        cptr * tmpc;
 
-    $$.code = NULL;
-    $$.val = 1;
-  }
+        tmpl = search_all($2.name);
+
+        if (tmpl == NULL){
+        sem_error2("assignment");
+        }
+
+        if (tmpl->kind != VARIABLE){
+        sem_error2("assignment2");
+        }
+
+        cptr *address_node = mergecode(mergecode($4.code, makecode(O_LIT, 0, tmpl->a)), makecode(O_OPR, 0, 2));
+
+        dump_node(address_node);
+
+        tmpc = mergecode(makecode(O_CSP, 0, 0), address_node);
+        tmpc = mergecode(tmpc, makecode(O_DST, 0, 0));
+        $$.code = tmpc;
+        // $.code = mergecode(makecode(O_CSP, 0, 0), makecode(O_STO, level - tmpl->l, tmpl->a));
+        $$.val = 0;
+    }
+    ...
 ```
 
-要素へ読み込み
-```
-| READ IDENT L_SQBRACKET expr R_SQBRACKET SEMICOLON {
-    list * tmpl;
-    cptr * tmpc;
-
-    tmpl = search_all($2.name);
-
-    if (tmpl == NULL){
-      sem_error2("assignment");
-    }
-
-    if (tmpl->kind != VARIABLE){
-      sem_error2("assignment2");
-    }
-
-    cptr *address_node = mergecode(mergecode($4.code, makecode(O_LIT, 0, tmpl->a)), makecode(O_OPR, 0, 2));
-
-    dump_node(address_node);
-
-    tmpc = mergecode(makecode(O_CSP, 0, 0), address_node);
-    tmpc = mergecode(tmpc, makecode(O_DST, 0, 0));
-    $$.code = tmpc;
-    // $.code = mergecode(makecode(O_CSP, 0, 0), makecode(O_STO, level - tmpl->l, tmpl->a));
-    $$.val = 0;
-  }
-```
+要素への入力。
 
 #### compiler/parser.y
 ```
-| IDENT L_SQBRACKET expr R_SQBRACKET ASN expr {
-    list *tmp;
+stmt
+    : ...
+    | IDENT L_SQBRACKET expr R_SQBRACKET ASN expr {
+        list *tmp;
 
-    tmp = search_all($1.name);
+        tmp = search_all($1.name);
 
-    // printf("%s at %d\n", tmp->name, tmp->a);
+        // printf("%s at %d\n", tmp->name, tmp->a);
 
-    if (tmp == NULL){
-      sem_error2("assignment");
+        if (tmp == NULL){
+        sem_error2("assignment");
+        }
+
+        if (tmp->kind != VARIABLE){
+        sem_error2("assignment2");
+        }
+
+        printf("%s base %d + offset ?\n", tmp->name, tmp->a);
+
+        cptr *address_node = mergecode(mergecode($3.code, makecode(O_LIT, 0, tmp->a)), makecode(O_OPR, 0, 2));
+
+        dump_node(address_node);
+
+        $$.code = mergecode(mergecode($6.code, address_node), makecode(O_DST, 0, 0));
+        $$.val = 0;
     }
-
-    if (tmp->kind != VARIABLE){
-      sem_error2("assignment2");
-    }
-
-    printf("%s base %d + offset ?\n", tmp->name, tmp->a);
-
-    cptr *address_node = mergecode(mergecode($3.code, makecode(O_LIT, 0, tmp->a)), makecode(O_OPR, 0, 2));
-
-    dump_node(address_node);
-
-    $$.code = mergecode(mergecode($6.code, address_node), makecode(O_DST, 0, 0));
-    $$.val = 0;
-  }
+    ...
 ```
 
+要素への代入。
 
-要素に取得
-#### compiler/psrser.y
+#### compiler/parser.y
 ```c
-| IDENT L_SQBRACKET expr R_SQBRACKET {
-    cptr* tmpc;
-    list* tmpl;
+expr
+    : ...
+    | IDENT L_SQBRACKET expr R_SQBRACKET {
+        cptr* tmpc;
+        list* tmpl;
 
-    tmpl = search_all($1.name);
-    if (tmpl == NULL){
-      sem_error2("id");
+        tmpl = search_all($1.name);
+        if (tmpl == NULL){
+        sem_error2("id");
+        }
+
+        if (tmpl->kind == VARIABLE){
+        // printf("%s base %d + offset ?\n", tmpl->name, tmpl->a);
+
+        cptr *address_node = mergecode(mergecode($3.code, makecode(O_LIT, 0, tmpl->a)), makecode(O_OPR, 0, 2));
+
+        // dump_node(address_node);
+
+        $$.code = mergecode(address_node, makecode(O_DLD, 0, 0));
+        $$.val = 0;
+        }
+        else {
+        sem_error2("id as variable");
+        }
     }
-
-    if (tmpl->kind == VARIABLE){
-      // printf("%s base %d + offset ?\n", tmpl->name, tmpl->a);
-
-      cptr *address_node = mergecode(mergecode($3.code, makecode(O_LIT, 0, tmpl->a)), makecode(O_OPR, 0, 2));
-
-      // dump_node(address_node);
-
-      $$.code = mergecode(address_node, makecode(O_DLD, 0, 0));
-      $$.val = 0;
-    }
-    else {
-      sem_error2("id as variable");
-    }
-  }
+    ...
 ```
+
+要素の取得。
 
 ## 条件演算子
-条件演算子 `&&`, `||`, `!` の実装です。
+条件演算子 `&&`, `||`, `!` の実装です。こちらも `pl0` には無い演算なのでVMから拡張していきます。
+
+### 構文
+```
+a && b;
+a || b;
+!a;
+```
+
+### 実装
+#### vm/inter.c
+```c
+void interpreter() {
+    ...
+    case P_AND:
+        --t;
+        s[t] = ( s[t] && s[t+1] );
+        break;
+    case P_OR:
+        --t;
+        s[t] = ( s[t] || s[t+1] );
+        break;
+    case P_NOT:
+        s[t] = s[t] ? 0 : 1;
+        break;
+    ...
+```
+
+#### compiler/lexer.l
+```
+"&&" return AND;
+"||" return OR;
+"!" return NOT;
+```
+
+#### compiler/parser.y
+```
+expr
+    : ...
+    | expr AND expr {
+        $$.code = mergecode(mergecode($1.code, $3.code), makecode(O_OPR, 0, 14));
+    }
+    | expr OR expr {
+        $$.code = mergecode(mergecode($1.code, $3.code), makecode(O_OPR, 0, 15));
+    }
+    | NOT expr {
+        $$.code = mergecode($2.code, makecode(O_OPR, 0, 16));
+    }
+    ...
+```
 
 ## インクリメント・デクリメント
 - 前置インクリメント(++i)
@@ -691,6 +870,159 @@ idents:
 
 を実装しました。
 
+### 生成したい `pl0` を考える
+後置インクリメント・デクリメントは式自体の評価された値と現在の変数の値が異なるので注意します。
+
+#### `++i`
+```
+i := i + 1;
+i;
+```
+
+#### `i++`
+```
+i := i + 1;
+i - 1;
+```
+
+#### `--i`
+```
+i := i - 1;
+i;
+```
+
+#### `i--`
+```
+i := i - 1;
+i + 1;
+```
+
+### 実装
+やるだけ
+
 #### compiler/parser.y
+```c
+expr
+    : ...
+    | INC IDENT {
+        // ++i -> i := i + 1; i;
+        list * v = search_all($1.name);
+        if (v == NULL){
+        sem_error2("inc");
+        }
+
+        cptr * t = mergecode(makecode(O_LOD, level - v->l, v->a), makecode(O_LIT, 0, 1));
+        t = mergecode(t, makecode(O_OPR, 0, 2));
+        t = mergecode(t, makecode(O_STO, level - v->l, v->a));
+        t = mergecode(t, makecode(O_LOD, level - v->l, v->a));
+        $$.code = t;
+    }
+    | DEC IDENT {
+        // --i -> i := i - 1; i;
+        list * v = search_all($1.name);
+        if (v == NULL){
+        sem_error2("dec");
+        }
+
+        cptr * t = mergecode(makecode(O_LOD, level - v->l, v->a), makecode(O_LIT, 0, 1));
+        t = mergecode(t, makecode(O_OPR, 0, 3));
+        t = mergecode(t, makecode(O_STO, level - v->l, v->a));
+        t = mergecode(t, makecode(O_LOD, level - v->l, v->a));
+        $$.code = t;
+    }
+    | IDENT INC {
+        // i++ -> i := i + 1; i - 1;
+        list * v = search_all($1.name);
+        if (v == NULL){
+        sem_error2("inc");
+        }
+
+        cptr * t = mergecode(makecode(O_LOD, level - v->l, v->a), makecode(O_LIT, 0, 1));
+        t = mergecode(t, makecode(O_OPR, 0, 2));
+        t = mergecode(t, makecode(O_STO, level - v->l, v->a));
+        t = mergecode(t, makecode(O_LOD, level - v->l, v->a));
+        t = mergecode(mergecode(t, makecode(O_LIT, 0, 1)), makecode(O_OPR, 0, 3));
+        $$.code = t;
+    }
+    | IDENT DEC {
+        // i-- -> i := i - 1; i + 1;
+        list * v = search_all($1.name);
+        if (v == NULL){
+        sem_error2("dec");
+        }
+
+        cptr * t = mergecode(makecode(O_LOD, level - v->l, v->a), makecode(O_LIT, 0, 1));
+        t = mergecode(t, makecode(O_OPR, 0, 3));
+        t = mergecode(t, makecode(O_STO, level - v->l, v->a));
+        t = mergecode(t, makecode(O_LOD, level - v->l, v->a));
+        t = mergecode(mergecode(t, makecode(O_LIT, 0, 1)), makecode(O_OPR, 0, 2));
+        $$.code = t;
+    }
+    ...
 ```
+
+## Appendix
+### `Makefile`
+#### vm/Makefile
+```makefile
+CC	= cc
+
+pl0vm	: inter.o  common.o
+	$(CC) inter.o  common.o -o pl0vm
+
+myinter2.o	: inter.c
+	$(CC) -c inter.c
+
+common.o	: common.c
+	$(CC) -c common.c
+
+clean:	
+	rm -f *~ *.o vm
 ```
+
+#### compiler/Makefile
+```makefile
+CC	= cc
+OPTS = -std=c99
+
+cmmc	: y.tab.c code.o env.o
+	$(CC) y.tab.c code.o env.o -ly -ll -o cmmc
+
+y.tab.c	: parser.y lex.yy.c
+	yacc -dv parser.y
+
+code.o	: code.c code.h
+	$(CC) $(OPTS) -c code.c
+
+env.o	: env.c env.h
+	$(CC) $(OPTS) -c env.c
+
+lex.yy.c	: lexer.l
+	lex -l lexer.l
+
+clean:
+	rm -f *~ *.o
+
+```
+
+### テスト
+詳細は省きますが、`python` からコマンドの実行が出来るので、それを利用してテストを書くと幸せになれるかもしれません。
+
+#### test/cmmctest.py
+```py
+...
+cases = {
+    'array.cmm': [[1, 2, 3, 4], [1, 3, 2, 4]],
+    'for.cmm': [[], [3, 2, 1]],
+    'goto.cmm': [[], [1, 2, 3]],
+    'case.cmm': [[4], [0]],
+    'pow.cmm': [[2], [16]],
+}
+...
+```
+
+入力と期待される出力の値を並べた図。
+
+![](https://i.gyazo.com/af61a99bb6831b994ff910cf513f9d31.png)
+
+精神衛生がいい。
