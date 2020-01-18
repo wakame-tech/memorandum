@@ -6,8 +6,16 @@ config()
 
 console.log(process.env.CONTENTFUL_SPACE_ID)
 
+const title = 'Memorundum'
+const description = '✨ TIL + Tech memos + Portfolio + Blog'
+const autometa_options = {
+  image: false,
+  canonical_base: 'https://wakame.tech',
+};
+
 module.exports = {
-  title: 'Memorundum',
+  title,
+  description,
   theme: 'meteorlxy',
   // theme: '@vuepress/theme-blog',
   plugins: [
@@ -26,7 +34,8 @@ module.exports = {
     // }],
     ['vuepress-plugin-mathjax', {
       target: 'svg'
-    }]
+    }],
+    [ 'autometa', autometa_options ]
   ],
   configureWebpack: {
     plugins: [
@@ -39,6 +48,7 @@ module.exports = {
       })
     ]
   },
+  serviceWorker: true,
   head: [
     ['link', { href: '/css/style.css', rel: 'stylesheet'}]
   ],
