@@ -1,3 +1,7 @@
+---
+layout: Section
+---
+
 # Today I Learned 🔥
 チュートリアルや入門したものについてまとめていきます.
 

@@ -1,5 +1,7 @@
 <template>
-  <div class="theme-container">
-    <h1>404</h1>
-  </div>
+  <section class="section is-medium">
+    <div class="container">
+      <h2>404</h2>
+    </div>
+  </section>
 </template>

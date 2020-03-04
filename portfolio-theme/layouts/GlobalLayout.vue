@@ -2,17 +2,16 @@
 <template>
   <div id="global-layout">
     <Header />
-    <Main />
+    <Layout />
     <Footer />
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
-import Main from '../components/Main'
 import Footer from '../components/Footer'
   
 export default {
-  components: { Header, Main, Footer },
+  components: { Header, Footer },
 }
 </script>

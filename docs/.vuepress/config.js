@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const { config } = require('dotenv')
 
 config()
@@ -7,41 +6,9 @@ module.exports = {
   title: 'Memorundum',
   description: '✨ TIL + Tech memos + Portfolio + Blog',
   theme: require.resolve('./../../portfolio-theme'),
-  plugins: [
-    ['@vuepress/blog', {
-      directories: [
-        {
-          id: 'post',
-          dirname: '_posts',
-          path: '/',
-        },
-      ],
-    }],
-    ['vuepress-plugin-typescript', {
-      tsLoaderOptions: {}
-    }],
-    ['vuepress-plugin-mathjax', {
-      target: 'svg'
-    }],
-    // for OGP
-    [ 'autometa', {
-      image: false,
-      canonical_base: 'https://wakame.tech',
-    }]
-  ],
-  configureWebpack: {
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          'CONTENTFUL_SPACE_ID': JSON.stringify(process.env.CONTENTFUL_SPACE_ID),
-          'CONTENTFUL_DELIVERY_ACCESS_TOKEN': JSON.stringify(process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN)
-        }
-      })
-    ]
-  },
   serviceWorker: true,
   pagination: {
-    perPage: 10,
+    perPage: 50,
   },
   defaultPages: {
     home: true,
@@ -56,6 +23,22 @@ module.exports = {
     ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }]
   ],
   themeConfig: {
+    about: {
+      nickname: 'wakame-tech',
+      bio: 'Doing Nothing',
+      avatar: 'https://images.ctfassets.net/ix7hhkbnjvh0/26vx1m8aWl3m7q9Tyfblbj/35e526d9fe6bc4f20b4fd16bd2794831/mel.jpg',
+      sns: {
+        github: {
+          account: 'wakame-tech',
+          link: 'https://github.com/wakame-tech',
+        },
+        twitter: 'wakame_tech'
+      },
+    },
+    contentful: {
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      token: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+    },
     nav: [
       {
         text: 'Home',
@@ -66,6 +49,16 @@ module.exports = {
         text: 'Blog',
         icon: 'fas fa-bars',
         link: '/',
+      },
+      {
+        text: 'Works',
+        icon: 'fas fa-bars',
+        link: '/works/',
+      },
+      {
+        text: 'Til',
+        icon: 'fas fa-bars',
+        link: '/til/',
       }
     ],
     footer: {
