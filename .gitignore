@@ -26,3 +26,7 @@ test/fixtures/**/.fbkpm
 /packages/lockfile/index.js
 .vscode/
 .env
+yarn.lock
+.png
+.jpg
+dist/

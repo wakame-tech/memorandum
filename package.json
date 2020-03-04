@@ -4,15 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev src",
-    "build": "vuepress build src",
-    "preview": "http-server src/.vuepress/dist"
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "preview": "http-server docs/.vuepress/dist"
   },
   "devDependencies": {
     "@vuepress/plugin-blog": "^1.5.1",
     "@vuepress/theme-blog": "^1.3.2",
     "dotenv-webpack": "^1.7.0",
+    "typescript": "^3.8.3",
     "vuepress-plugin-autometa": "^0.1.13",
+    "vuepress-plugin-typescript": "^0.2.0",
     "webpack": "^4.41.2"
   },
   "dependencies": {
@@ -20,7 +22,6 @@
     "dotenv": "^8.2.0",
     "vue-markdown": "^2.2.4",
     "vuepress": "^1.2.0",
-    "vuepress-plugin-mathjax": "^1.2.8",
-    "vuepress-theme-meteorlxy": "^1.7.1"
+    "vuepress-plugin-mathjax": "^1.2.8"
   }
 }

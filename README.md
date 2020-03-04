@@ -4,6 +4,7 @@
 ✨ TIL + Tech memos + Portfolio + Blog + Practice repos with VuePress 
 
 ## TODO
+- create custom theme
 - TIL view
 - move prac repos
 - Activity view
