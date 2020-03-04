@@ -18,6 +18,8 @@
     "webpack": "^4.41.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "buefy": "^0.8.12",
     "contentful": "^7.10.0",
     "dotenv": "^8.2.0",

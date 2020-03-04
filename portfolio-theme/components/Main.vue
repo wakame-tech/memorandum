@@ -16,9 +16,9 @@ export default {
         return layout
       }
       if (!this.$page.path) {
-        return 'NotFound'
+        return '404'
       }
-      return 'Home'
+      return 'Content'
     }
   }
 }

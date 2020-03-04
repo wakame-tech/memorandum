@@ -52,17 +52,35 @@ module.exports = {
       lang: 'ja-JP'
     }
   },
+  head: [
+    ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }]
+  ],
   themeConfig: {
     nav: [
       {
-        text: 'Blog',
-        link: '/',
+        text: 'Home',
+        icon: 'fas fa-bars',
+        link: '/home/',
       },
       {
-        text: 'Home',
-        link: '/home/',
+        text: 'Blog',
+        icon: 'fas fa-bars',
+        link: '/',
       }
-    ]
+    ],
+    footer: {
+      contact: [
+        {
+          type: 'github',
+          link: 'https://github.com/wakame-tech',
+        },
+        {
+          type: 'twitter',
+          link: 'https://twitter.com/wakame_tech',
+        }
+      ],
+      copyright: 'Copyright © 2020 wakame-tech'
+    },
   }
   // themeConfig: {
   //   comments: false,
@@ -112,24 +130,6 @@ module.exports = {
   //       url: '/img/bg.jpg',
   //       useGeo: false,
   //     }
-  //   },
-  //   footer: {
-  //     contact: [
-  //       {
-  //         type: 'github',
-  //         link: 'https://github.com/wakame-tech',
-  //       },
-  //       {
-  //         type: 'twitter',
-  //         link: 'https://twitter.com/wakame_tech',
-  //       }
-  //     ],
-  //     copyright: [
-  //       {
-  //         text: 'MIT Licensed | Copyright © 2020 wakame-tech',
-  //         link: 'https://github.com/wakame-tech/memorandum',
-  //       }
-  //     ]
   //   },
   // }
 }

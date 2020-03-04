@@ -1,0 +1,7 @@
+<template>
+  <section class="section is-medium">
+    <div class="container">
+      <Content />
+    </div>
+  </section>
+</template>

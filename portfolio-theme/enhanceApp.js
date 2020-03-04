@@ -1,5 +1,6 @@
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+import '@fortawesome/fontawesome'
 
 export default ({
     Vue, // the version of Vue being used in the VuePress app
