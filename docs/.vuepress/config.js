@@ -8,6 +8,15 @@ module.exports = {
   description: '✨ TIL + Tech memos + Portfolio + Blog',
   theme: require.resolve('./../../portfolio-theme'),
   plugins: [
+    ['@vuepress/blog', {
+      directories: [
+        {
+          id: 'post',
+          dirname: '_posts',
+          path: '/',
+        },
+      ],
+    }],
     ['vuepress-plugin-typescript', {
       tsLoaderOptions: {}
     }],
@@ -47,6 +56,14 @@ module.exports = {
     nav: [
       {
         text: 'Home',
+        link: '/'
+      }
+    ]
+  },
+  themeConfig: {
+    nav: [
+      {
+        text: 'Blog',
         link: '/'
       }
     ]

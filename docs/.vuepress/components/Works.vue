@@ -12,7 +12,7 @@
           </div>
         </div>
 
-        <Markdown :slotKey="work.description" />
+        <!-- <Markdown :slotKey="work.description" /> -->
 
         <p class="date"> {{ new Date(work.date).toDateString() }} </p>
       </div>
@@ -22,7 +22,7 @@
 
 <script>
 import * as Contentful from 'contentful'
-import Markdown from './Markdown'
+// import Markdown from './Markdown'
 // import process from 'process'
 
 export const createClient = () => {
@@ -49,7 +49,7 @@ export const fetchContents = async (query) => {
 export default {
   name: 'Works',
   components: {
-    Markdown
+    // Markdown
   },
   data() {
     return {
