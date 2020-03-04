@@ -18,6 +18,7 @@
     "webpack": "^4.41.2"
   },
   "dependencies": {
+    "buefy": "^0.8.12",
     "contentful": "^7.10.0",
     "dotenv": "^8.2.0",
     "vue-markdown": "^2.2.4",

@@ -55,16 +55,12 @@ module.exports = {
   themeConfig: {
     nav: [
       {
-        text: 'Home',
-        link: '/'
-      }
-    ]
-  },
-  themeConfig: {
-    nav: [
-      {
         text: 'Blog',
-        link: '/'
+        link: '/',
+      },
+      {
+        text: 'Home',
+        link: '/home/',
       }
     ]
   }
