@@ -1,7 +1,7 @@
 <template>
   <div v-if="$pagination">
     <!-- Post List -->
-    <template v-for="page in $pagination.pages">
+    <template v-for="page in publishedPosts">
       <div class="card" :key="page.title">
         <div class="card-content">
           <div class="title">
@@ -111,5 +111,12 @@
 
 <script>
 export default {
+  computed: {
+    publishedPosts() {
+      return this.$pagination.pages.filter(page => {
+        return page.frontmatter.draft ? !page.frontmatter.draft : true
+      })
+    }
+  }
 }
 </script>
