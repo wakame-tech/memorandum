@@ -1,9 +1,6 @@
 const webpack = require('webpack')
 
 module.exports = (opts, ctx) => {
-  // themeConfig
-  console.log(opts)
-
   const options = {
     name: 'portfolio-theme',
     plugins: [
@@ -13,6 +10,9 @@ module.exports = (opts, ctx) => {
             id: 'post',
             dirname: '_posts',
             path: '/',
+            pagination: {
+              lengthPerPage: opts.perPage || 50,
+            },
           },
         ],
       }],

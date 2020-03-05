@@ -7,9 +7,6 @@ module.exports = {
   description: '✨ Portfolio + Blog + Tech Memos + Practice Repos',
   theme: require.resolve('./../../portfolio-theme'),
   serviceWorker: true,
-  pagination: {
-    perPage: 50,
-  },
   defaultPages: {
     home: true,
     posts: true,
@@ -35,6 +32,7 @@ module.exports = {
         twitter: 'wakame_tech'
       },
     },
+    perPage: 50,
     contentful: {
       spaceId: process.env.CONTENTFUL_SPACE_ID,
       token: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,

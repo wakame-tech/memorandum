@@ -1,19 +1,24 @@
 <template>
-  <section class="section is-medium">
-    <div class="container">
-      <Content />
-    </div>
+  <div>
+    <section class="section is-medium">
+      <div class="container">
+        <Content />
+      </div>
+    </section>
 
     <!-- Work List -->
-    <div class="container" v-for="work in works">
-      <div class="card" :key="work.title">
+    <section class="section" :key="work.title" v-for="work in works">
+      <div class="card">
         <div v-if="work.thumbnail" class="card-image">
           <figure class="image">
             <img :src="work.thumbnail.fields.file.url" alt="Placeholder image">
           </figure>
         </div>
         <div class="card-content">
-          <div class="title">{{ work.title }}</div>
+          <div class="title">
+            {{ work.title }}
+            <Badge>{{ work.genre }}</Badge>
+          </div>
 
           <div class="card-content">
             <b-taglist>
@@ -23,39 +28,21 @@
                 </router-link>
               </b-tag>
             </b-taglist>
-            
-            <div class="content">
-              {{ work.description }}
 
-              <time>{{ new Date(work.date).toDateString() }}</time>
-            </div>
+            <div v-html="marked(work.description)" />
+
+            <time class="has-text-grey">{{ new Date(work.date).toDateString() }}</time>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
-import * as Contentful from 'contentful'
 
-export const createClient = (spaceId, token) => {
-  return Contentful.createClient({
-    space: spaceId,
-    accessToken: token,
-  })
-}
-
-export const fetchContents = async (client, query) => {
-  const entries = await client.getEntries(query)
-    .catch(console.error)
-
-  if (!entries) {
-    return []
-  }
-  
-  return entries.items.map(entry => entry.fields)
-}
+import marked from 'marked'
+import { createClient, fetchContents } from '../api/contentful'
 
 export default {
   name: 'Works',
@@ -70,7 +57,10 @@ export default {
       'content_type': 'work',
       'order': '-fields.date'
     })
-  }
+  },
+  methods: {
+    marked
+  },
 }
 </script>
 

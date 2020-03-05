@@ -29,10 +29,39 @@
         </div>
       </div>
     </template>
-    
+
     <!-- Pagination(TODO) -->
-    <section id="section">
-      <!-- <b-pagination
+    <!-- <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+      <router-link
+        :to="`/pages/${$pagination.currentIndex - 1}`"
+        class="pagination-previous"
+        :disabled="!$pagination.hasPrev"
+      >
+        <i class="fas fa-chevron-left"/>
+      </router-link>
+      <router-link
+        :to="`/pages/${$pagination.currentIndex + 1}`"
+        class="pagination-next"
+        :disabled="!$pagination.hasNext"
+      >
+        <i class="fas fa-chevron-right"/>
+      </router-link>
+
+      <div class="pagination-list">
+        <div v-for="(page, i) in $pagination.pages">
+          <router-link
+            :to="`/pages/${i + 1}`"
+            :class="{ 'pagination-link': true, 'is-current': $pagination.currentIndex == i + 1 }"
+            aria-label="Page 1"
+            aria-current="page"
+          >
+            {{ i + 1 }}
+          </router-link>
+        </div>
+      </div>
+    </nav> -->
+    <!-- <section id="section">
+      <b-pagination
         icon-pack="fas"
         :total="pages"
         :current="currentPage"
@@ -75,34 +104,12 @@
         </b-pagination-button>
       </b-pagination>
       <router-link v-if="$pagination.hasPrev" :to="$pagination.prevLink">Prev</router-link>
-      <router-link v-if="$pagination.hasNext" :to="$pagination.nextLink">Next</router-link> -->
-    </section>
+      <router-link v-if="$pagination.hasNext" :to="$pagination.nextLink">Next</router-link>
+    </section> -->
   </div>
 </template>
 
 <script>
 export default {
-  computed: {
-    pages() {
-      if (!this.$pagination) {
-        return 0
-      }
-      console.log(this.$pagination._paginationPages.length)
-      return this.$pagination._paginationPages.length
-    },
-    currentPage() {
-      console.log(this.$pagination.paginationIndex)
-      return this.$pagination.paginationIndex + 1
-    },
-    perPage() {
-      if (!this.$pagination) {
-        return 0
-      }
-      const range = this.$pagination._paginationPages[0].interval
-      console.log(range[1] - range[0] + 1)
-      // return range[1] - range[0] + 1
-      return 50
-    }
-  }
 }
 </script>
