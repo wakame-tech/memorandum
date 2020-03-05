@@ -5,3 +5,8 @@
     </div>
   </footer>
 </template>
+
+<style lang="stylus" scoped>
+.footer
+  padding: 0.5rem
+</style>

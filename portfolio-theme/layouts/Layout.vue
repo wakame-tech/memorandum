@@ -1,5 +1,7 @@
 <template>
-  <component :is="layout" :key="$page.path" />
+  <div class="content">
+    <component :is="layout" :key="$page.path" />
+  </div>
 </template>
 
 <script>

@@ -2,7 +2,7 @@
 layout: Section
 ---
 
-# Memorundum - Top
+# About
 
 <About />
 

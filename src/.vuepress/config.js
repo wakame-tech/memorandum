@@ -3,8 +3,8 @@ const { config } = require('dotenv')
 config()
 
 module.exports = {
-  title: 'Memorundum',
-  description: '✨ TIL + Tech memos + Portfolio + Blog',
+  title: 'Memorandum',
+  description: '✨ Portfolio + Blog + Tech Memos + Practice Repos',
   theme: require.resolve('./../../portfolio-theme'),
   serviceWorker: true,
   pagination: {
@@ -41,23 +41,23 @@ module.exports = {
     },
     nav: [
       {
-        text: 'Home',
-        icon: 'fas fa-bars',
-        link: '/home/',
+        text: 'About',
+        icon: 'fas fa-portrait',
+        link: '/about/',
       },
       {
         text: 'Blog',
-        icon: 'fas fa-bars',
+        icon: 'fas fa-file-alt',
         link: '/',
       },
       {
         text: 'Works',
-        icon: 'fas fa-bars',
+        icon: 'fas fa-images',
         link: '/works/',
       },
       {
         text: 'Til',
-        icon: 'fas fa-bars',
+        icon: 'fas fa-fire',
         link: '/til/',
       }
     ],
