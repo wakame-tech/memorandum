@@ -1,10 +1,9 @@
 ---
-layout: Section
+title: 👀 bio
+date: 2020-06-01
+tags: [Bio]
+pinned: true
 ---
-
-# ？ About
-
-<About />
 
 # 📖 History
 - 高校1年: プログラミングを始める

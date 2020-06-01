@@ -1,5 +1,5 @@
 ---
-title: 💻 自作言語インタプリタを作りたい2
+title: 自作言語インタプリタを作りたい2
 date: 2018-08-05
 tags: [programming]
 vssue: false

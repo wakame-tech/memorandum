@@ -1,33 +1,28 @@
 <template>
   <div v-if="$pagination">
     <!-- Post List -->
-    <template v-for="page in publishedPosts">
-      <div class="card" :key="page.title">
-        <div class="card-content">
-          <div class="title">
-            <router-link
-              class="page-link"
-              :to="page.path"
-            >
-            {{ page.title }}
-            </router-link>
-          </div>
-
+    <template v-for="page in sortedPosts">
+      <router-link class="page-link" :to="page.path">
+        <div class="card" :key="page.title">
           <div class="card-content">
-            <b-taglist>
-              <b-tag :key="tag" type="is-info" v-for="tag in page.frontmatter.tags || []" >
-                <!-- <router-link tag="p" :to="'/tag/' + encode(tag)"> -->
-                  {{ tag }}
-                <!-- </router-link> -->
-              </b-tag>
-            </b-taglist>
-            
-            <div class="content">
-              {{ page.frontmatter.description }}
+            <h5 class="is-5"> {{ makeTitle(page) }} </h5>
+            <div class="card-content">
+              <b-taglist>
+                <b-tag v-if="page.frontmatter.pinned" :key="page.title" type="is-primary">pinned</b-tag>
+                <b-tag :key="tag" type="is-light" v-for="tag in page.frontmatter.tags || []" >
+                  <!-- <router-link tag="p" :to="'/tag/' + encode(tag)"> -->
+                    {{ tag }}
+                  <!-- </router-link> -->
+                </b-tag>
+              </b-taglist>
+              
+              <div class="content">
+                {{ page.frontmatter.description }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </router-link>
     </template>
 
     <!-- Pagination(TODO) -->
@@ -112,16 +107,37 @@
 <script>
 export default {
   computed: {
-    publishedPosts() {
-      return this.$pagination.pages.filter(page => {
-        return page.frontmatter.draft ? !page.frontmatter.draft : true
-      })
-    }
+    sortedPosts() {
+      return this.$pagination.pages
+        // filter published
+        .filter(page => page.frontmatter.draft ? !page.frontmatter.draft : true)
+        // pinned post
+        .sort((a, b) => a.frontmatter.pinned ? -1 : (b.frontmatter.pinned ? 1 : 0))
+    },
   },
   methods: {
+    containEmoji(text) {
+      const ranges = ['\ud83c[\udf00-\udfff]', '\ud83d[\udc00-\ude4f]', '\ud83d[\ude80-\udeff]', '\ud7c9[\ude00-\udeff]', '[\u2600-\u27BF]']
+      const reg = new RegExp(ranges.join('|'), 'g')
+      return text.match(reg)
+    },
+    emoji(tag) {
+      const tagMap = {
+        'ポエム': '🔥',
+        'programming': '💻',
+      }
+      return tagMap[tag] || '📖'
+    },
+    makeTitle(page) {
+      if (this.containEmoji(page.title)) {
+        return page.title
+      } else {
+        return `${this.emoji(page.frontmatter.tags[0])} {page.title}`
+      }
+    },
     encode(text) {
       return encodeURI(text)
-    }
+    },
   },
 }
 </script>

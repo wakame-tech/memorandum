@@ -17,7 +17,7 @@ module.exports = {
     }
   },
   head: [
-    ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }]
+    // ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }],
   ],
   themeConfig: {
     about: {
@@ -38,11 +38,6 @@ module.exports = {
       token: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
     },
     nav: [
-      {
-        text: 'About',
-        icon: 'fas fa-portrait',
-        link: '/about/',
-      },
       {
         text: 'Blog',
         icon: 'fas fa-file-alt',

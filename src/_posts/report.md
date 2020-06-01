@@ -1,5 +1,5 @@
 ---
-title: 📖 もう二度とTeXを書かないようにするために
+title: もう二度とTeXを書かないようにするために
 date: 2018-08-11
 tags: [TeX, レポート, 大学]
 vssue: false

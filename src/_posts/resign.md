@@ -1,5 +1,5 @@
 ---
-title: 👋 飲食店バイトをやめました
+title: 飲食店バイトをやめました
 date: 2018-08-29
 tags: [雑記]
 vssue: false
