@@ -13,10 +13,11 @@
 
       <div class="card-content">
         <b-taglist>
-          <b-tag :key="tag" type="is-info" v-for="tag in work.tags" >
-            <router-link tag="p" :to="'/tag/' + tag">
+          <b-tag :key="tag" type="is-light" v-for="tag in work.tags" >
+            {{ tag }}
+            <!-- <router-link tag="p" :to="'/tag/' + tag">
               {{ tag }}
-            </router-link>
+            </router-link> -->
           </b-tag>
         </b-taglist>
 

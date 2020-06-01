@@ -94,3 +94,8 @@ Unityは触ったことがあります。
 
 ## 音楽鑑賞
 Kawaii Future Base、アニソンが好きです。
+
+# Links
+- [SpeakerDeck](https://speakerdeck.com/wakame_tech)
+- [Youtube](https://www.youtube.com/channel/UCbf9D2dmBSAZeoxOGM69XPA?view_as=subscriber)
+- [Github](https://github.com/wakame-tech)

@@ -1,16 +1,8 @@
 <template>
   <div>
-    <section class="section is-medium">
-      <div class="container">
-        <Content />
-      </div>
-    </section>
-
     <!-- Work List -->
     <div :key="work.title" v-for="work in works">
-      <div class="section">
-        <Work :work="work" />
-      </div>
+      <Work :work="work" />
     </div>
   </div>
 </template>
