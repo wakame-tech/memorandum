@@ -15,12 +15,15 @@ export default {
         return 'Posts'
       }
       const layout = this.$page.frontmatter.layout
+
       if (layout) {
         return layout
       }
+
       if (!this.$page.path) {
-        return 'Not Found'
+        return 'NotFound'
       }
+
       return 'Content'
     }
   }

@@ -16,9 +16,9 @@
           <div class="card-content">
             <b-taglist>
               <b-tag :key="tag" type="is-info" v-for="tag in page.frontmatter.tags || []" >
-                <router-link tag="p" :to="`/tag/${tag}`">
+                <!-- <router-link tag="p" :to="'/tag/' + encode(tag)"> -->
                   {{ tag }}
-                </router-link>
+                <!-- </router-link> -->
               </b-tag>
             </b-taglist>
             
@@ -117,6 +117,11 @@ export default {
         return page.frontmatter.draft ? !page.frontmatter.draft : true
       })
     }
-  }
+  },
+  methods: {
+    encode(text) {
+      return encodeURI(text)
+    }
+  },
 }
 </script>

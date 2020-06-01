@@ -3,7 +3,7 @@
   <div id="global-layout">
     <Header />
     <Layout />
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 

@@ -1,7 +1,27 @@
 <template>
-  <section class="section is-medium">
-    <div class="container">
-      <h2>404</h2>
+  <div>
+    <div class="section">
+      <div class="block has-text-grey is-size-1">
+        <i class="fas fa-exclamation-triangle" />
+        NullReferenceException
+      </div>
+
+      <div>
+        <p class="is-size-4">
+          せっかくなのでリンク集おいておきます
+        </p>
+        <a href="https://dice.kamata1919.now.sh/">縛りカラオケルーレット</a>
+        <br />
+        <a href="https://youtu.be/yRbjyzpEAJ8">Youtube - 三麻配信テスト</a>
+      </div>
     </div>
-  </section>
+  </div>
 </template>
+
+<script>
+export default {
+  mounted() {
+    console.log('404')
+  }
+}
+</script>
