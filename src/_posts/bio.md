@@ -1,101 +1,72 @@
 ---
-title: 👀 bio
+title: 👀 Bio
 date: 2020-06-01
 tags: [Bio]
 pinned: true
 ---
 
-# 📖 History
-- 高校1年: プログラミングを始める
-- 大学2年まで: 無
-- 大学3年: インターンはじめる
-- 今まで: 無
+大学生です. Web技術に興味があります.
 
-# ✨ Skills
-できることとそれに対する5段階の自己評価  
+### ⛓ Links
 
-## Fundamentals
-`C`, `C++`, `Git`, `GitHub`, `VSCode`, `JetBrain`のエディタ, `シェルスクリプト`, `Docker`, `Slack`, `SQL`, `Markdown`等は人並みにわかります。
-
-## Web Frontend
-主に趣味とインターンでWebサービスを作っていました。  
-`TypeScript`, `Vue`等は不自由なく使えます。  
-`PHP`, `Ruby on Rails`, `Elm`, `React`, `Svelte`等は触ったことある程度です。  
-
-また、CSSフレームワークは `BootStrap`, `Element UI`, `Semantic UI`, `Tailwind CSS`, `Bulma` 等は触ったことがあります。  
-
-`Stylus`, `Pug` 好きです。
-
-## Backend
-インターンでは`AWS Lambda` の経験があります。
-趣味では `Node.js(Express, Micro)`, `Go`, `Flask(Python)` を触ったことがあります。
-
-## インフラ
-IaaSは `GCP`, `AWS`, `Azure` を触ったことがあります。  
-`Docker`, `docker-compose` は少しだけ分かります。  
-`k8s` はわかりません。
-
-## アプリ
-`Kotlin` は少しわかりますが、Androidアプリ開発経験はありません。  
-`Swift(+ Swift UI)` は大学の授業として半年間触りました。iOSアプリ開発の知見はあまりありません。  
-`Flutter` は趣味で使っています。
-
-## 統計・データサイエンス・機械学習
-大学の授業として統計学、パターン認識の基礎を学びましたが
-統計学、機械学習の知見は皆無です。  
-`R` は授業で半年間触りましたが忘れました。
-`Python` は結構書いていました。  
-インターンで`PyTorch` による自然言語処理を少しやっていました。
-
-## デザイン・イラスト
-普段からCSSフレームワーク等に頼っているのでデザインはしたことがありません。また絵心も0です。
-
-## 英語
-開発時、英語のドキュメントやStack Overflow等は人並みに読みますが、書く、話すは絶望的です。
-
-## その他
-Unityは触ったことがあります。
-
-# ⚽ Hobbies
-## 開発
-新しい技術が好きなのでQiitaとかで気になったものを試したりしてます。作りたいものが無限にある
-
-## VTuber
-`個人勢`、`技術系`、`にじさんじ`を主にみます。
-♥️♦️♠️♣️🎲🐺🍎🌖🌲
-
-## 麻雀
-初めたばかり(2019.12)ですが無限にやってしまいます。
-
-## ゲーム
-一人でやるゲームは続かず友達とやるゲームしかしません。  
-`MineCraft`, `お絵かきの森(ピクトセンス)` あたりをたまにやります。  
-
-どちらかと言うとボードゲーム、カードゲームの方がよくやります。
-
-## ピアノ
-昨夏にピアノ教室をやめましたが、家にピアノがある以上細々と続けています。
-
-## 動画制作
-年1ペースでゲーム制作動画を投稿しています。  
-ゲーム制作の進捗がないので動画も滞っています。
-
-## アロマテラピー
-友人に影響を受けアロマディフューザーや精油を2万円分位買いました。
-
-## TRPG
-クトゥルフTRPGが一瞬流行りました。
-
-## エレキギター
-買っただけです。
-
-## アニメ
-人並みに観ます
-
-## 音楽鑑賞
-Kawaii Future Base、アニソンが好きです。
-
-# Links
-- [SpeakerDeck](https://speakerdeck.com/wakame_tech)
+- [Twitter](https://twitter.com/wakame_tech)
+- [GitHub](https://github.com/wakame-tech)
+- [Qiita](https://qiita.com/wakame_tech)
 - [Youtube](https://www.youtube.com/channel/UCbf9D2dmBSAZeoxOGM69XPA?view_as=subscriber)
-- [Github](https://github.com/wakame-tech)
+- [SpeakerDeck](https://speakerdeck.com/wakame_tech)
+- [AtCoder]()
+
+### ✨ Skills
+#### Web Frontend
+主に趣味とインターンでWebサービスを作っていました。  
+`TypeScript`, `Vue`等は不自由なく使えます。
+
+- `JavaScript` (2015~)
+- `TypeScript`, `Vue.js` (2018~)
+- `PHP`, `rails`, `Elm`, `React`, `Svelte` (*)
+
+#### CSS FrameWorks
+- `BootStrap`
+- `SemanticUI`
+- `TailwindCSS`
+- `Bulma`
+<small>(*) 触れたことある程度</small>
+
+#### Backend
+インターンや趣味で少し経験あります. `NestJS` が好き.
+- `node.js` (2016~)
+- `Go` (2019~)
+- `Python(Flask)` (*)
+
+#### その他
+`Firebase` 信者です. `GraphQL` 好き. `k8s` 触った程度. `SQL` 普通.
+- `Firebase`
+- `AWS Lambda`
+- `AWS EC2`
+- `Docker`
+
+#### モバイルアプリ
+`Flutter` でアプリ開発しています.
+
+- `Flutter` (2020)
+- `Swift + Swift UI` (2020, *)
+
+#### 機械学習
+インターンにて自然言語処理を少しやらせていただいております. いつか本格的に勉強したい.
+
+- `Python` (2018~)
+- `R` (2019, *)
+- `PyTorch` (2019~)
+
+#### 研究
+秘匿化ブロックチェーンについて研究する予定です(暫定). 勉強したい.
+
+- `Solidity` (*)
+
+#### その他
+- `Unity` (2017~, *)
+- `Kotlin` (2016~, *)
+- `C++` (2014~, *)
+- `C` (2017~)
+- `Rust` (2020~)
+- `Elixir`, `Scala` (*)

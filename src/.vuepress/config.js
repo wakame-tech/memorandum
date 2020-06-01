@@ -17,7 +17,7 @@ module.exports = {
     }
   },
   head: [
-    // ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }],
+    ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }],
   ],
   themeConfig: {
     about: {

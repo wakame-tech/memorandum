@@ -3,22 +3,28 @@
     <!-- Post List -->
     <template v-for="page in sortedPosts">
       <router-link class="page-link" :to="page.path">
-        <div class="card" :key="page.title">
+        <div :class="{ card: true, 'has-background-light': page.frontmatter.pinned }" :key="page.title">
           <div class="card-content">
             <h5 class="is-5"> {{ makeTitle(page) }} </h5>
-            <div class="card-content">
-              <b-taglist>
-                <b-tag v-if="page.frontmatter.pinned" :key="page.title" type="is-primary">pinned</b-tag>
-                <b-tag :key="tag" type="is-light" v-for="tag in page.frontmatter.tags || []" >
-                  <!-- <router-link tag="p" :to="'/tag/' + encode(tag)"> -->
-                    {{ tag }}
-                  <!-- </router-link> -->
-                </b-tag>
-              </b-taglist>
-              
-              <div class="content">
-                {{ page.frontmatter.description }}
-              </div>
+            <b-taglist>
+              <b-tag v-if="page.frontmatter.pinned" :key="page.title" type="is-primary">pinned</b-tag>
+              <b-tag :key="tag" type="is-light" v-for="tag in page.frontmatter.tags || []" >
+                <!-- <router-link tag="p" :to="'/tag/' + encode(tag)"> -->
+                  {{ tag }}
+                <!-- </router-link> -->
+              </b-tag>
+            </b-taglist>
+            
+            <div class="content">
+              {{ page.frontmatter.description }}
+            </div>
+
+            <div>
+              <span class="has-text-grey is-size-7">{{ from(page.frontmatter.date) }}</span>
+              <span v-if="page.frontmatter.pinned" class="has-text-grey is-size-7 is-pulled-right">
+                <i class="fa fa-map-pin"></i>
+                この投稿は固定されています
+              </span>
             </div>
           </div>
         </div>
@@ -105,6 +111,9 @@
 </template>
 
 <script>
+import moment from 'moment-timezone'
+moment.tz.setDefault('Asia/Tokyo')
+
 export default {
   computed: {
     sortedPosts() {
@@ -116,6 +125,9 @@ export default {
     },
   },
   methods: {
+    from(date) {
+      return moment(date).fromNow()
+    },
     containEmoji(text) {
       const ranges = ['\ud83c[\udf00-\udfff]', '\ud83d[\udc00-\ude4f]', '\ud83d[\ude80-\udeff]', '\ud7c9[\ude00-\udeff]', '[\u2600-\u27BF]']
       const reg = new RegExp(ranges.join('|'), 'g')
@@ -132,7 +144,7 @@ export default {
       if (this.containEmoji(page.title)) {
         return page.title
       } else {
-        return `${this.emoji(page.frontmatter.tags[0])} {page.title}`
+        return this.emoji(page.frontmatter.tags[0]) + page.title
       }
     },
     encode(text) {

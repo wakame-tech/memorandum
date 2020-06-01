@@ -1,12 +1,15 @@
 <template>
   <div>
     <!-- Hero -->
-    <section class="hero">
+    <section :class="{ hero: true, 'is-dark': isDarkMode }">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
             {{ $page.frontmatter.title || $page.title }}
           </h1>
+          <h2 v-if="isDarkMode" class="subtitle">
+            (ダークモード未実装)
+          </h2>
         </div>
       </div>
     </section>
@@ -30,7 +33,12 @@
 export default {
   name: 'Header',
   mounted() {
-    console.log(this.$route)
+    console.log(this.isDarkMode)
+  },
+  computed: {
+    isDarkMode() {
+      return !!window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
   }
 }
 </script>
