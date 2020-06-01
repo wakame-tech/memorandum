@@ -37,7 +37,9 @@ export default {
   },
   computed: {
     isDarkMode() {
-      return !!window.matchMedia('(prefers-color-scheme: dark)').matches
+      // no ssr
+      // return !!window.matchMedia('(prefers-color-scheme: dark)').matches
+      return (typeof window !== 'undefined') && !!window.matchMedia('(prefers-color-scheme: dark)').matches
     }
   }
 }
