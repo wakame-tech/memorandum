@@ -17,12 +17,14 @@
     <div class="tabs is-centered">
       <ul>
         <template v-for="nav in $themeConfig.nav">
-          <b-navbar-item :class="{ 'is-active': $route.path === nav.link }" tag="router-link" :key="nav.text" :to="nav.link">
-            <span v-if="nav.icon" class="icon">
-              <i :class="nav.icon"></i>
-            </span>
-            {{ nav.text }}
-          </b-navbar-item>
+          <li :key="nav.text" :class="{ 'is-active': $route.path === nav.link }">
+            <router-link :to="nav.link">
+              <span v-if="nav.icon" class="icon">
+                <i :class="nav.icon"></i>
+              </span>
+              {{ nav.text }}
+            </router-link>
+          </li>
         </template>
       </ul>
     </div>
@@ -32,6 +34,11 @@
 <script>
 export default {
   name: 'Header',
+  data() {
+    return {
+      active: 0,
+    }
+  },
   mounted() {
     console.log(this.isDarkMode)
   },
