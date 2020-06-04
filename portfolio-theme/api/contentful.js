@@ -17,3 +17,8 @@ export const fetchContents = async (client, query) => {
   
   return entries.items.map(entry => entry.fields)
 }
+
+export const fetchContent = async (client, id) => {
+  return client.getEntry(id)
+    .catch(console.error)
+}

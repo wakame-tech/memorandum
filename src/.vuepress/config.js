@@ -49,10 +49,10 @@ module.exports = {
         link: '/works/',
       },
       {
-        text: 'Til',
+        text: 'Other',
         icon: 'fas fa-fire',
-        link: '/til/',
-      }
+        link: '/other/',
+      },
     ],
     footer: {
       contact: [
