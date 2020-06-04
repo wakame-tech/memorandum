@@ -1,37 +1,36 @@
 import _ from 'lodash'
 
 export class Gacha {
-  constructor(contents) {
+  constructor(contents, distri) {
     this.contents = contents
-    this.distri = {
-      1: 100,
-    }
-
-    // contracts
-    if (!contents.every(c => c['rare'] && this.distri[c['rare']])) {
-      throw 'invalid'
-    }
+    this.distri = distri
   }
 
   localizeRare(r) {
-    return {
-      1: 'R',
-    }[r] || '--'
+    const map = _.keyBy(this.distri, d => d['rare'])
+    return map[r]['name'] || '--'
+  }
+
+  colorizeRare(r) {
+    return ({
+      2: 'tag is-primary',
+      3: 'tag is-info',
+    })[r] || 'tag is-light'
   }
 
   summary() {
-    return Object.entries(this.distri).map(([k, v]) => `${this.localizeRare(k)}: ${v}%`).join('<br>')
+    return this.distri.map(d => `${d['name']}: ${d['percent']}%`).join('\n')
   }
 
   roll() {
     const r = Math.floor(Math.random() * 100)
     const rare = (() => {
       let tmp = 0
-      for (let [k, v] of Object.entries(this.distri)) {
-        if (tmp < r && r <= tmp + v) {
-          return k
+      for (let d of this.distri) {
+        if (tmp < r && r <= tmp + d['percent']) {
+          return d['rare']
         }
-        tmp += v
+        tmp += d['percent']
       }
       throw 'unreach'
     })()

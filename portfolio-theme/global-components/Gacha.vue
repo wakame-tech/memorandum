@@ -17,7 +17,7 @@
     <div class="p-2" v-if="results.length">
       <ul>
         <li v-for="(result, i) in results" :key="i">
-          <span class="tag is-light">{{ localizeRare(result['rare']) }}</span>
+          <span :class="colorizeRare(result['rare'])">{{ localizeRare(result['rare']) }}</span>
           <span>{{ result['tite'] }} / {{ result['artist'] || '不明' }} ({{ result['from'] }}~)</span>
         </li>
       </ul>
@@ -55,9 +55,9 @@ export default {
   async created() {
     const client = createClient(this.$themeConfig.contentful.spaceId, this.$themeConfig.contentful.token)
     const res = await fetchContent(client, this.id)
-    console.log(res)
+    console.log(res.fields)
     this.title = res.fields.title
-    this.gacha = new Gacha(res.fields.dataset)
+    this.gacha = new Gacha(res.fields.dataset, res.fields.distri)
   },
   methods: {
     roll(k) {
@@ -65,6 +65,9 @@ export default {
     },
     localizeRare(r) {
       return this.gacha.localizeRare(r)
+    },
+    colorizeRare(r) {
+      return this.gacha.colorizeRare(r)
     },
   }
 }
