@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { createClient, fetchContent } from '../api/contentful'
 import { Gacha } from '../api/gacha'
 
@@ -55,26 +55,19 @@ export default {
   async created() {
     const client = createClient(this.$themeConfig.contentful.spaceId, this.$themeConfig.contentful.token)
     const res = await fetchContent(client, this.id)
-    console.log(res.fields)
     this.title = res.fields.title
     this.gacha = new Gacha(res.fields.dataset, res.fields.distri)
   },
   methods: {
-    roll(k) {
+    roll(k: number) {
       this.results = [...Array(k)].map(() => this.gacha.roll())
     },
-    localizeRare(r) {
+    localizeRare(r: number) {
       return this.gacha.localizeRare(r)
     },
-    colorizeRare(r) {
+    colorizeRare(r: number) {
       return this.gacha.colorizeRare(r)
     },
   }
 }
 </script>
-
-<style scoped>
-.pt-2 {
-  padding-top: 1rem;
-}
-</style>

@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Work from '../components/Work'
 import { createClient, fetchContents } from '../api/contentful'
 

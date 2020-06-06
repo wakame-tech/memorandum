@@ -3,15 +3,13 @@
   <div id="global-layout">
     <Header />
     <Layout />
-    <!-- <Footer /> -->
   </div>
 </template>
 
-<script>
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+<script lang="ts">
+import Header from '../components/Header.vue'
   
 export default {
-  components: { Header, Footer },
+  components: { Header },
 }
 </script>

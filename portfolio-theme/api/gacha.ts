@@ -1,12 +1,15 @@
 import _ from 'lodash'
 
-export class Gacha {
-  constructor(contents, distri) {
+export class Gacha<T> {
+  private contents: T[]
+  private distri: object[]
+
+  constructor(contents: T[], distri: object[]) {
     this.contents = contents
     this.distri = distri
   }
 
-  localizeRare(r) {
+  localizeRare(r: number) {
     const map = _.keyBy(this.distri, d => d['rare'])
     return map[r]['name'] || '--'
   }
@@ -34,7 +37,6 @@ export class Gacha {
       }
       throw 'unreach'
     })()
-    console.log(`rare: ${rare}`)
     const targets = _.groupBy(this.contents, c => c['rare'])
     
     return _.sample(targets[rare])

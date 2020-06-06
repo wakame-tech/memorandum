@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import marked from 'marked'
 import { createClient, fetchContents } from '../api/contentful'
 

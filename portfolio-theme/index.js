@@ -16,9 +16,7 @@ module.exports = (opts, ctx) => {
           },
         ],
       }],
-      ['vuepress-plugin-typescript', {
-        tsLoaderOptions: {}
-      }],
+      ['vuepress-plugin-typescript'],
       ['vuepress-plugin-mathjax', {
         target: 'svg'
       }],
@@ -26,7 +24,8 @@ module.exports = (opts, ctx) => {
       [ 'autometa', {
         image: false,
         canonical_base: 'https://wakame.tech',
-      }]
+      }],
+      ['vuepress-plugin-typescript'],
     ],
     enhanceAppFiles: ['./enhanceApp.js'],
   }

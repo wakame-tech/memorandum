@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"],
+    },
+    "esModuleInterop": true,
+    "types": ["vuepress-types"]
+  }
+}

@@ -1,18 +1,15 @@
 <template>
   <div>
     <!-- Hero -->
-    <section class="hero">
+    <!-- <section class="hero">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            {{ $page.frontmatter.title || $page.title }}
+            {{ $page.frontmatter.title }}
           </h1>
-          <!-- <h2 v-if="isDarkMode" class="subtitle">
-            (ダークモード未実装)
-          </h2> -->
         </div>
       </div>
-    </section>
+    </section> -->
 
     <div class="tabs is-centered">
       <ul>
@@ -31,7 +28,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'Header',
   data() {
@@ -39,12 +36,5 @@ export default {
       active: 0,
     }
   },
-  // computed: {
-  //   isDarkMode() {
-  //     // no ssr
-  //     // return !!window.matchMedia('(prefers-color-scheme: dark)').matches
-  //     return (typeof window !== 'undefined') && !!window.matchMedia('(prefers-color-scheme: dark)').matches
-  //   }
-  // }
 }
 </script>

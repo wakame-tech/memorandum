@@ -2,6 +2,9 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import '@fortawesome/fontawesome'
 
+import momentMixin from './api/moment-mixin'
+import emojiMixin from './api/emoji'
+
 export default ({
     Vue, // the version of Vue being used in the VuePress app
     options, // the options for the root Vue instance
@@ -9,4 +12,8 @@ export default ({
     siteData // site metadata
 }) => {
     Vue.use(Buefy)
+
+    Vue.mixin({
+        mixins: [momentMixin, emojiMixin]
+    })
 }

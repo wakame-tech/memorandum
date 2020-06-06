@@ -11,44 +11,25 @@
     </div>
 
     <div class="card-content">
-      <b-taglist>
-        <b-tag :key="tag" :class="tagColor(tag)" v-for="tag in work.tags" >
-          {{ tag }}
-          <!-- <router-link tag="p" :to="'/tag/' + tag">
-            {{ tag }}
-          </router-link> -->
-        </b-tag>
-      </b-taglist>
+      <tags :tags="work.tags" />
 
       <div v-html="marked(work.description)" />
 
-      <time class="has-text-grey is-size-7">{{ formatDate(work.date) }}</time>
+      <time class="has-text-grey is-size-7">{{ work.date | moment }}</time>
     </div>
   </div>
 </template>
 
-<script>
-import moment from 'moment-timezone'
-moment.tz.setDefault('Asia/Tokyo')
+<script lang="ts">
+import Tags from '../components/Tags.vue'
 import marked from 'marked'
 
 export default {
   name: 'Works',
+  components: { Tags },
   props: ['work'],
   methods: {
     marked,
-    formatDate(date) {
-      return moment(date).format('YYYY/MM')
-    },
-    tagColor(tag) {
-      const colorMap = {
-        'WIP': 'tag is-danger',
-        'web': 'tag is-primary',
-        'app': 'tag is-info',
-        '低レイヤー': 'tag is-warning',
-      }
-      return colorMap[tag] || 'tag is-light'
-    }
   },
 }
 </script>
@@ -59,7 +40,4 @@ export default {
   width: auto
   background-size: contain
   background-position: center
-
-.has-margin-1
-  margin: 0.3rem
 </style>
