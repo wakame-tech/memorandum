@@ -27,7 +27,9 @@ export default {
       const colorMap = {
         'WIP': 'tag is-danger',
         'web': 'tag is-primary',
+        'ポエム': 'tag is-primary',
         'app': 'tag is-info',
+        '授業': 'tag is-info',
         '低レイヤー': 'tag is-warning',
       }
       return colorMap[tag] || 'tag is-light'

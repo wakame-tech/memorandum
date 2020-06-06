@@ -1,8 +1,7 @@
 ---
 title: ✋ ブログまたはじめました
 date: 2018-06-08
-tags: [other]
-vssue: false
+tags: [ポエム]
 ---
 # 久しぶりです  
 

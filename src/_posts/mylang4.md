@@ -1,8 +1,7 @@
 ---
 title: 自作言語インタプリタを作りたい4
 date: 2018-08-08
-tags: [programming]
-vssue: false
+tags: [言語処理系]
 ---
 
 # ただいま

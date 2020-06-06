@@ -1,8 +1,7 @@
 ---
 title: 自作言語インタプリタを作りたい1
 date: 2018-08-04
-tags: [programming]
-vssue: false
+tags: [言語処理系]
 ---
 ## 夏休み突入
 
