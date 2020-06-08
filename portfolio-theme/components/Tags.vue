@@ -10,17 +10,9 @@
 
 <script lang="ts">
 export default {
+  name: 'Tags',
   props: {
-    tags: {
-      type: [Array, String],
-      required: true,
-      default: () => []
-    }
-  },
-  mounted() {
-    if (typeof this.tags === 'string') {
-      this.tags = this.tags.split(',')
-    }
+    tags: Array
   },
   methods: {
     tagColor(tag) {

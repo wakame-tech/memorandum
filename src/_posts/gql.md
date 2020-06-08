@@ -1,7 +1,7 @@
 ---
-title: Nest.ts + Nuxt.tsでモダンGraphQL APIを作る
+title: Nest.js + Nuxt.jsでモダンGraphQL APIを作る
 date: 2020-04-04
-tags: [Web, Nest.js, GraphQL, Nuxt.js, TypeScript]
+tags: [web, Nuxt.js, Nestjs, TypeScript]
 draft: true
 ---
 

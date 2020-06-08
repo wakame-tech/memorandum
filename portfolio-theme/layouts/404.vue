@@ -11,17 +11,7 @@
           せっかくなのでリンク集おいておきます
         </p>
         <a href="https://dice.kamata1919.now.sh/">縛りカラオケルーレット</a>
-        <br />
-        <a href="https://youtu.be/yRbjyzpEAJ8">Youtube - 三麻配信テスト</a>
       </div>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  mounted() {
-    console.log('404')
-  }
-}
-</script>

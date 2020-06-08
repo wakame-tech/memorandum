@@ -1,23 +1,35 @@
-import * as Contentful from 'contentful'
+import { createClient, ContentfulClientApi, Entry } from 'contentful'
 
-export const createClient = (spaceId: string, token: string) => {
-  return Contentful.createClient({
-    space: spaceId,
-    accessToken: token,
-  })
-}
+export class Contentful {
+  private client: ContentfulClientApi
 
-export const fetchContents = async <T>(client: Contentful.ContentfulClientApi, query: object): Promise<T[]> => {
-  const entries = await client.getEntries<T>(query)
-    .catch(console.error)
-
-  if (!entries) {
-    return []
+  constructor(spaceId: string, token: string) {
+    this.client = createClient({
+      space: spaceId,
+      accessToken: token,
+    })
   }
+
+  async fetchContents<T>(query: object): Promise<T[]>  {
+    const entries = await this.client.getEntries<T>(query)
+      .catch(console.error)
   
-  return entries.items.map(entry => entry.fields)
+    if (!entries) {
+      return []
+    }
+    
+    return entries.items.map(entry => entry.fields)
+  }
+
+  async fetchContent <T>(id: string): Promise<Entry<T>> {
+    return this.client.getEntry<T>(id)
+  }
 }
 
-export const fetchContent = async <T>(client: Contentful.ContentfulClientApi, id: string): Promise<Contentful.Entry<T>> => {
-  return client.getEntry<T>(id)
+export default {
+  computed: {
+    '$contentful'() {
+      return new Contentful(this.$themeConfig.contentful.spaceId, this.$themeConfig.contentful.token)
+    }
+  },
 }

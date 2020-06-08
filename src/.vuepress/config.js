@@ -7,6 +7,9 @@ module.exports = {
   description: '✨ Portfolio + Blog + Tech Memos + Practice Repos',
   theme: require.resolve('./../../portfolio-theme'),
   serviceWorker: true,
+  plugins: [
+    ['vuepress-plugin-typescript'],
+  ],
   defaultPages: {
     home: true,
     posts: true,

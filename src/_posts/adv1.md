@@ -1,7 +1,7 @@
 ---
 title: 📅 GraphQLのクエリの引数で配列を使いたい時
 date: 2018-12-01
-tags: [GraphQL]
+tags: [web, GraphQL]
 ---
 
 # 趣旨

@@ -8,11 +8,9 @@
 </template>
 
 <script lang="ts">
-import Work from '../components/Work'
-import { createClient, fetchContents } from '../api/contentful'
+import Work from '../components/Work.vue'
 
 export default {
-  name: 'Works',
   components: { Work },
   data() {
     return {
@@ -20,8 +18,7 @@ export default {
     }
   },
   async created() {
-    const client = createClient(this.$themeConfig.contentful.spaceId, this.$themeConfig.contentful.token)
-    this.works = await fetchContents(client, {
+    this.works = await this.$contentful.fetchContents({
       'content_type': 'work',
       'order': '-fields.date'
     })

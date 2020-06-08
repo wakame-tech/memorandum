@@ -25,7 +25,6 @@ import Tags from '../components/Tags.vue'
 import marked from 'marked'
 
 export default {
-  name: 'Works',
   components: { Tags },
   props: ['work'],
   methods: {

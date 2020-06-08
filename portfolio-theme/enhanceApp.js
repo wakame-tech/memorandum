@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome'
 
 import momentMixin from './api/moment-mixin'
 import emojiMixin from './api/emoji'
+import contentfulMixin from './api/contentful'
 
 export default ({
     Vue, // the version of Vue being used in the VuePress app
@@ -14,6 +15,6 @@ export default ({
     Vue.use(Buefy)
 
     Vue.mixin({
-        mixins: [momentMixin, emojiMixin]
+        mixins: [momentMixin, emojiMixin, contentfulMixin]
     })
 }
