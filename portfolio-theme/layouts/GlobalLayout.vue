@@ -1,17 +1,17 @@
 
 <template>
   <div id="global-layout">
-    <Header />
+    <TheHeader />
     <Layout />
-    <Footer />
+    <TheFooter />
   </div>
 </template>
 
 <script lang="ts">
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
+import TheHeader from '../components/TheHeader.vue'
+import TheFooter from '../components/TheFooter.vue'
 
 export default {
-  components: { Header, Footer },
+  components: { TheHeader, TheFooter },
 }
 </script>

@@ -33,7 +33,7 @@
 
 <script lang="ts">
 export default {
-  name: 'Header',
+  name: 'TheHeader',
   data() {
     return {
       active: 0,
