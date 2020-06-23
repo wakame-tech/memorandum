@@ -1,7 +1,7 @@
 ---
 title: 理想のソーシャルゲームが作りたい2 -モデル定義編-
 date: 2019-08-23
-tags: [ポエム]
+tags: [Draft, ポエム]
 draft: true
 ---
 

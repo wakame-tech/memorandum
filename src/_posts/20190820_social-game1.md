@@ -1,7 +1,7 @@
 ---
 title: 理想のソーシャルゲームが作りたい1 -概要編-
 date: 2019-08-20
-tags: [ポエム]
+tags: [Draft, ポエム]
 draft: true
 ---
 

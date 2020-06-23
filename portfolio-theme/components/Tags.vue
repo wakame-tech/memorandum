@@ -17,12 +17,15 @@ export default {
   methods: {
     tagColor(tag) {
       const colorMap = {
-        'WIP': 'tag is-danger',
+        'Draft': 'tag is-warning',
+        'WIP': 'tag is-warning',
         'web': 'tag is-primary',
-        'ポエム': 'tag is-primary',
-        'app': 'tag is-info',
-        '授業': 'tag is-info',
-        '低レイヤー': 'tag is-warning',
+        '言語処理系': 'tag is-primary',
+        'アルゴリズム': 'tag is-danger',
+        '機械学習': 'tag is-primary',
+        'ポエム': 'tag is-info',
+        'app': 'tag is-primary',
+        '低レイヤー': 'tag is-dark',
       }
       return colorMap[tag] || 'tag is-light'
     }
