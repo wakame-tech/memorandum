@@ -1,8 +1,8 @@
 <template>
   <router-link class="page-link" :to="post.path">
-    <div :class="{ card: true, 'has-background-light': post.frontmatter.pinned }" :key="post.title">
+    <div class="card" :key="post.title">
       <div class="card-content">
-        <h5 class="is-5"> {{ post | emoji }} </h5>
+        <div class="is-size-3 has-text-weight-light"> {{ post | emoji }} </div>
 
         <tags :tags="post.frontmatter.tags" />
         

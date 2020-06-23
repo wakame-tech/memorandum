@@ -11,15 +11,18 @@
       </div>
     </section> -->
 
-    <div class="tabs is-centered">
+
+    <p class="pl-2 page-title is-size-3">Memorandom</p>
+
+    <div class="tabs is-boxed is-centered">
       <ul>
         <template v-for="nav in $themeConfig.nav">
           <li :key="nav.text" :class="{ 'is-active': $route.path === nav.link }">
-            <router-link :to="nav.link">
-              <span v-if="nav.icon" class="icon">
-                <i :class="nav.icon"></i>
+            <router-link tag="a" :to="nav.link">
+              <span v-if="nav.icon" class="icon is-small">
+                <i aria-hidden="true" :class="nav.icon"></i>
               </span>
-              {{ nav.text }}
+              <span>{{ nav.text }}</span>
             </router-link>
           </li>
         </template>
@@ -38,3 +41,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.page-title {
+  font-family: 'Tangerine', cursive;
+}
+</style>

@@ -20,10 +20,12 @@ module.exports = {
     }
   },
   head: [
+    ['link', { rel: 'icon', type: 'image/jpg', href: 'img/favicon.jpg' }],
     ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }],
   ],
   themeConfig: {
     about: {
+      title: 'Memorandum',
       nickname: 'wakame-tech',
       bio: 'Doing Nothing',
       avatar: 'https://images.ctfassets.net/ix7hhkbnjvh0/26vx1m8aWl3m7q9Tyfblbj/35e526d9fe6bc4f20b4fd16bd2794831/mel.jpg',

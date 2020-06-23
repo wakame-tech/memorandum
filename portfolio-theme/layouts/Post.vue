@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="title p-2">
-      {{ $page.frontmatter.title }}
+    <div class="p-2">
+      <div class="is-size-3 has-text-weight-light">{{ $page.frontmatter.title }}</div>
 
-      <time class="has-text-grey is-size-5">{{ $page.frontmatter.date | date }}</time>
+      <div class="has-text-grey is-size-7">{{ $page.frontmatter.date | date }} ({{ $page.frontmatter.date | from }})</div>
+
+      <div class="pt-2">
+        <tags :tags="$page.frontmatter.tags" />
+      </div>
     </div>
 
     <div class="section">
@@ -11,3 +15,11 @@
     </div>
   </div>
 </template>
+
+<script lang="typescript">
+import Tags from '../components/Tags.vue'
+
+export default {
+  components: { Tags },
+}
+</script>

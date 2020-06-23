@@ -1,12 +1,12 @@
 <template>
   <div class="box has-margin-1">
-    <div class="title">
+    <div class="is-size-3 has-text-weight-light">
       {{ work.title }}
     </div>
 
     <div v-if="work.thumbnail" class="card-image">
       <figure class="image">
-        <img :src="work.thumbnail.fields.file.url" alt="Placeholder image">
+        <img loading="lazy" :src="work.thumbnail.fields.file.url" alt="Placeholder image">
       </figure>
     </div>
 
