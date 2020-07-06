@@ -4,11 +4,16 @@ config()
 
 module.exports = {
   title: 'Memorandum',
-  description: '✨ Portfolio + Blog + Tech Memos + Practice Repos',
+  description: 'ブログのようなポートフォリオのような何か',
   theme: require.resolve('./../../portfolio-theme'),
   serviceWorker: true,
   plugins: [
     ['vuepress-plugin-typescript'],
+    ['@vuepress/google-analytics',
+      {
+        'ga': 'UA-149255712-1'
+      }
+    ]
   ],
   defaultPages: {
     home: true,
@@ -30,11 +35,8 @@ module.exports = {
       bio: 'Doing Nothing',
       avatar: 'https://images.ctfassets.net/ix7hhkbnjvh0/26vx1m8aWl3m7q9Tyfblbj/35e526d9fe6bc4f20b4fd16bd2794831/mel.jpg',
       sns: {
-        github: {
-          account: 'wakame-tech',
-          link: 'https://github.com/wakame-tech',
-        },
-        twitter: 'wakame_tech'
+        github: 'https://github.com/wakame-tech',
+        twitter: 'https://twitter.com/wakame_tech',
       },
     },
     perPage: 50,
