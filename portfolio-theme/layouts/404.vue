@@ -8,9 +8,8 @@
 
       <div>
         <p class="is-5">
-          せっかくなのでリンク集おいておきます
+          {{ '{{ ここにテキストを入力 }}' }}
         </p>
-        <a href="https://dice.kamata1919.now.sh/">縛りカラオケルーレット</a>
       </div>
     </div>
   </div>

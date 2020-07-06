@@ -1,12 +1,12 @@
 <template>
   <div v-if="$pagination">
+    <PostCard :post="post"  v-for="post in sortedPosts" />
+
     <section class="section">
       <div class="field">
         <b-checkbox v-model="showDraft">ドラフトも含める</b-checkbox>
       </div>
     </section>
-
-    <PostCard :post="post"  v-for="post in sortedPosts" />
   </div>
 </template>
 

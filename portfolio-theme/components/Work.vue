@@ -1,8 +1,8 @@
 <template>
   <div class="box has-margin-1">
-    <div class="is-size-3 has-text-weight-light">
+    <h4 class="is-size-4 has-text-weight-light">
       {{ work.title }}
-    </div>
+    </h4>
 
     <div v-if="work.thumbnail" class="card-image">
       <figure class="image">

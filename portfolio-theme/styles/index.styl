@@ -1,12 +1,7 @@
-// @require './config'
+@require './variable'
 @import './code'
 @import './padding'
-// @import './content'
-// @require './custom-blocks'
-// @require './arrow'
-// @require './wrapper'
-// @require './toc'
-// @require './variable'
+@import './content'
 
 // google font
 @import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
@@ -23,5 +18,13 @@ body
   -moz-osx-font-smoothing grayscale
   font-size 16px
 
+.page-title
+  font-family: 'Tangerine', cursive
+
 .content figure
   margin 0
+
+.footer
+  padding: 2rem
+  a
+    color: white

@@ -12,7 +12,9 @@
     </section> -->
 
 
-    <p class="pl-2 page-title is-size-3">Memorandom</p>
+    <a href="/">
+      <p class="pl-2 page-title is-size-3">Memorandom</p>
+    </a>
 
     <div class="tabs is-boxed is-centered">
       <ul>
@@ -41,9 +43,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.page-title {
-  font-family: 'Tangerine', cursive;
-}
-</style>

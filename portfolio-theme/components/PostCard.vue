@@ -2,7 +2,7 @@
   <router-link class="page-link" :to="post.path">
     <div class="card" :key="post.title">
       <div class="card-content">
-        <div class="is-size-3 has-text-weight-light"> {{ post | emoji }} </div>
+        <h4 class="is-size-4 has-text-weight-light"> {{ post | emoji }} </h4>
 
         <tags :tags="post.frontmatter.tags" />
         

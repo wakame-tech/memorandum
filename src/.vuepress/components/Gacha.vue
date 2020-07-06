@@ -10,11 +10,11 @@
     </details>
 
     <div class="buttons pt-2">
-      <b-button class="is-info" @click="gacha.roll(1); animate()">ガチャを引く</b-button>
-      <b-button class="is-light" @click="gacha.roll(10); animate()">10連</b-button>
+      <b-button class="is-info" @click="gacha.roll(1)">ガチャを引く</b-button>
+      <b-button class="is-light" @click="gacha.roll(10)">10連</b-button>
     </div>
 
-    <div class="p-2">
+    <div class="p-1">
       <ul>
         <li ref="item" v-for="(result, i) in gacha.results" :key="i">
           <span :class="gacha.colorizeRare(result['rare'])">{{ gacha.localizeRare(result['rare']) }}</span>
