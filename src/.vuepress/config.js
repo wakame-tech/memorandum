@@ -1,5 +1,6 @@
 const { config } = require('dotenv')
-
+const md_img_lazy = require('./../../portfolio-theme/api/md_img_lazy')
+const md_link_preview = require('./../../portfolio-theme/api/md_link_preview')
 config()
 
 module.exports = {
@@ -64,5 +65,13 @@ module.exports = {
         link: '/other/',
       },
     ],
+  },
+  // <https://v1.vuepress.vuejs.org/guide/markdown.html#import-code-snippets>
+  markdown: {
+    lineNumbers: true,
+    extendMarkdown: (md) => {
+      md.use(md_img_lazy)
+      md.use(md_link_preview)
+    }
   }
 }
