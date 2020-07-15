@@ -6,7 +6,11 @@
 
     <div v-if="work.thumbnail" class="card-image">
       <figure class="image">
-        <img loading="lazy" :src="work.thumbnail.fields.file.url" alt="Placeholder image">
+        <progressive-img
+          :src="work.thumbnail.fields.file.url"
+          :placeholder="work.thumbnail.fields.file.url + '?w=50&h=100'"
+        />
+
       </figure>
     </div>
 
@@ -22,7 +26,7 @@
 
 <script lang="ts">
 import Tags from '../components/Tags.vue'
-import marked from 'marked'
+import marked from '../api/custom-marked'
 
 export default {
   components: { Tags },
