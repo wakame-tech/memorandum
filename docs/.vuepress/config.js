@@ -28,6 +28,7 @@ module.exports = {
     ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }],
   ],
   themeConfig: {
+    base: 'https://wakame.tech',
     about: {
       title: 'Memorandum',
       nickname: 'wakame-tech',
@@ -52,13 +53,9 @@ module.exports = {
     },
     nav: [
       {
-        text: 'About',
-        link: '/',
-      },
-      {
         text: 'Blog',
         icon: 'fas fa-file-alt',
-        link: '/blog/',
+        link: '/',
       },
       {
         text: 'Works',

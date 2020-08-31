@@ -19,6 +19,7 @@
     "scss-loader": "^0.0.1",
     "typescript": "^3.9.5",
     "vuepress-plugin-autometa": "^0.1.13",
+    "vuepress-plugin-feed": "^0.1.8",
     "vuepress-plugin-typescript": "^0.3.0",
     "vuepress-types": "^0.9.3",
     "webpack": "^4.41.2"
