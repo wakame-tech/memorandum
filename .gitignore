@@ -30,3 +30,5 @@ yarn.lock
 .png
 .jpg
 dist/
+
+tagMap.json

@@ -1,12 +1,10 @@
 {
-  "name": "memorandum",
+  "name": "vuepress-bulma-theme",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
-    "preview": "http-server docs/.vuepress/dist"
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.155",
@@ -19,7 +17,6 @@
     "scss-loader": "^0.0.1",
     "typescript": "^3.9.5",
     "vuepress-plugin-autometa": "^0.1.13",
-    "vuepress-plugin-feed": "^0.1.8",
     "vuepress-plugin-typescript": "^0.3.0",
     "vuepress-types": "^0.9.3",
     "webpack": "^4.41.2"
@@ -40,7 +37,6 @@
     "vue-animejs": "^2.1.1",
     "vue-progressive-image": "^3.2.0",
     "vuepress": "^1.2.0",
-    "vuepress-bulma-theme": "link:../vuepress-bulma-theme",
     "vuepress-plugin-mathjax": "^1.2.8"
   }
 }

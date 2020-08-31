@@ -2,16 +2,16 @@
   <div v-if="$pagination">
     <PostCard :post="post"  v-for="post in sortedPosts" />
 
-    <section class="section">
+    <!-- <section class="section">
       <div class="field">
         <b-checkbox v-model="showDraft">ドラフトも含める</b-checkbox>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
 <script lang="ts">
-import PostCard from './PostCard.vue'
+import PostCard from '../components/PostCard.vue'
 
 export default {
   components: { PostCard },

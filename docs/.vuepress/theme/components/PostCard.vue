@@ -1,6 +1,6 @@
 <template>
   <router-link class="page-link" :to="post.path">
-    <div class="card" :key="post.title">
+    <div class="card m-2" :key="post.title">
       <div class="card-content">
         <h4 class="is-size-4 has-text-weight-light"> {{ post | emoji }} </h4>
 
@@ -23,8 +23,6 @@
 </template>
 
 <script lang="ts">
-import Tags from '../components/Tags.vue'
-
 export default {
   props: {
     post: {
@@ -32,7 +30,7 @@ export default {
       required: true,
     }
   },
-  components: { Tags },
+  components: { },
   methods: {
     encode(text) {
       return encodeURI(text)

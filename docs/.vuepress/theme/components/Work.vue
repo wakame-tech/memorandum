@@ -4,9 +4,13 @@
       {{ work.title }}
     </h4>
 
-    <div v-if="work.thumbnail" class="card-image">
+    <div v-if="work.thumbnail">
       <figure class="image">
-        <img loading="lazy" :src="work.thumbnail.fields.file.url" alt="Placeholder image">
+        <img :src="work.thumbnail.fields.file.url" />
+        <!-- <progressive-image
+          :src="work.thumbnail.fields.file.url"
+          :placeholder="work.thumbnail.fields.file.url + '?w=50&h=100'"
+        /> -->
       </figure>
     </div>
 
@@ -21,11 +25,10 @@
 </template>
 
 <script lang="ts">
-import Tags from '../components/Tags.vue'
-import marked from 'marked'
+import marked from '../api/custom-marked'
 
 export default {
-  components: { Tags },
+  components: { },
   props: ['work'],
   methods: {
     marked,
@@ -33,10 +36,12 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.card-image img
-  max-height: 70vh
-  width: auto
-  background-size: contain
-  background-position: center
+<style>
+.image img {
+  /* width: auto !important; */
+  max-height: 40vh !important;
+  /* object-fit: scale-down; */
+  background-position: center;
+  object-fit: contain;
+}
 </style>

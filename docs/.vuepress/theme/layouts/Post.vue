@@ -17,9 +17,7 @@
 </template>
 
 <script lang="typescript">
-import Tags from '../components/Tags.vue'
 
 export default {
-  components: { Tags },
 }
 </script>

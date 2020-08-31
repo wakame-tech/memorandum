@@ -20,10 +20,15 @@ module.exports = (opts, ctx) => {
       ['vuepress-plugin-mathjax', {
         target: 'svg'
       }],
+      [ 'feed',
+        {
+          canonical_base: opts.base,
+        }
+      ],
       // for OGP
       [ 'autometa', {
         image: false,
-        canonical_base: 'https://wakame.tech',
+        canonical_base: opts.base,
       }],
       ['vuepress-plugin-typescript'],
     ],

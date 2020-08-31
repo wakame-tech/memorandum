@@ -1,11 +1,10 @@
 const { config } = require('dotenv')
-
 config()
 
 module.exports = {
   title: 'Memorandum',
   description: 'ブログのようなポートフォリオのような何か',
-  theme: require.resolve('./../../portfolio-theme'),
+  // theme: theme,
   serviceWorker: true,
   plugins: [
     ['vuepress-plugin-typescript'],
@@ -29,6 +28,7 @@ module.exports = {
     ['link', { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' }],
   ],
   themeConfig: {
+    base: 'https://wakame.tech',
     about: {
       title: 'Memorandum',
       nickname: 'wakame-tech',
@@ -41,11 +41,15 @@ module.exports = {
     },
     perPage: 50,
     contentful: {
-      spaceId: process.env.CONTENTFUL_SPACE_ID,
-      token: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+      spaceId: process.env.CONTENTFUL_SPACE,
+      token: process.env.CONTENTFUL_TOKEN,
     },
     scrapbox: {
       url: 'https://scrapbox.io/api/pages/wakame-memorundum'
+    },
+    notion: {
+      pageId: process.env.DIARY_PAGE_ID,
+      token: process.env.NOTION_TOKEN,
     },
     nav: [
       {
@@ -64,5 +68,13 @@ module.exports = {
         link: '/other/',
       },
     ],
+  },
+  // <https://v1.vuepress.vuejs.org/guide/markdown.html#import-code-snippets>
+  markdown: {
+    lineNumbers: true,
+    // extendMarkdown: (md) => {
+    //   // md.use(md_img_lazy)
+    //   // md.use(md_link_preview)
+    // }
   }
 }

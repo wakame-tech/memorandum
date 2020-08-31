@@ -28,8 +28,13 @@ export class Contentful {
 
 export default {
   computed: {
-    '$contentful'() {
-      return new Contentful(this.$themeConfig.contentful.spaceId, this.$themeConfig.contentful.token)
+    '$contentful'(): Contentful | null {
+      const space = this.$themeConfig?.contentful?.spaceId
+      const token = this.$themeConfig?.contentful?.token
+      if (!space || !token) {
+        return null
+      }
+      return new Contentful(space, token)
     }
   },
 }
