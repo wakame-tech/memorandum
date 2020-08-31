@@ -1,12 +1,10 @@
 const { config } = require('dotenv')
-const md_img_lazy = require('./../../portfolio-theme/api/md_img_lazy')
-const md_link_preview = require('./../../portfolio-theme/api/md_link_preview')
 config()
 
 module.exports = {
   title: 'Memorandum',
   description: 'ブログのようなポートフォリオのような何か',
-  theme: require.resolve('./../../portfolio-theme'),
+  theme: require.resolve('../../../vuepress-bulma-theme'),
   serviceWorker: true,
   plugins: [
     ['vuepress-plugin-typescript'],
@@ -42,17 +40,25 @@ module.exports = {
     },
     perPage: 50,
     contentful: {
-      spaceId: process.env.CONTENTFUL_SPACE_ID,
-      token: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+      spaceId: process.env.CONTENTFUL_SPACE,
+      token: process.env.CONTENTFUL_TOKEN,
     },
     scrapbox: {
       url: 'https://scrapbox.io/api/pages/wakame-memorundum'
     },
+    notion: {
+      pageId: process.env.DIARY_PAGE_ID,
+      token: process.env.NOTION_TOKEN,
+    },
     nav: [
+      {
+        text: 'About',
+        link: '/',
+      },
       {
         text: 'Blog',
         icon: 'fas fa-file-alt',
-        link: '/',
+        link: '/blog/',
       },
       {
         text: 'Works',
@@ -70,8 +76,8 @@ module.exports = {
   markdown: {
     lineNumbers: true,
     extendMarkdown: (md) => {
-      md.use(md_img_lazy)
-      md.use(md_link_preview)
+      // md.use(md_img_lazy)
+      // md.use(md_link_preview)
     }
   }
 }
