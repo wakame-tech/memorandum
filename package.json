@@ -39,7 +39,7 @@
     "prism-themes": "^1.3.0",
     "vue-animejs": "^2.1.1",
     "vue-progressive-image": "^3.2.0",
-    "vuepress": "^1.2.0",
+    "vuepress": "^1.5.4",
     "vuepress-bulma-theme": "link:../vuepress-bulma-theme",
     "vuepress-plugin-mathjax": "^1.2.8"
   }
