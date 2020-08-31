@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "preview": "http-server .docs/.vuepress/dist"
+    "preview": "http-server docs/.vuepress/dist"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.155",
@@ -40,6 +40,7 @@
     "vue-animejs": "^2.1.1",
     "vue-progressive-image": "^3.2.0",
     "vuepress": "^1.2.0",
+    "vuepress-bulma-theme": "link:../vuepress-bulma-theme",
     "vuepress-plugin-mathjax": "^1.2.8"
   }
 }

@@ -4,7 +4,7 @@ config()
 module.exports = {
   title: 'Memorandum',
   description: 'ブログのようなポートフォリオのような何か',
-  theme: require.resolve('../../../vuepress-bulma-theme'),
+  // theme: theme,
   serviceWorker: true,
   plugins: [
     ['vuepress-plugin-typescript'],
@@ -72,9 +72,9 @@ module.exports = {
   // <https://v1.vuepress.vuejs.org/guide/markdown.html#import-code-snippets>
   markdown: {
     lineNumbers: true,
-    extendMarkdown: (md) => {
-      // md.use(md_img_lazy)
-      // md.use(md_link_preview)
-    }
+    // extendMarkdown: (md) => {
+    //   // md.use(md_img_lazy)
+    //   // md.use(md_link_preview)
+    // }
   }
 }
